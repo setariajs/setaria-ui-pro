@@ -1,4 +1,4 @@
-# ume-emc
+# Setaria-UI-Pro
 
 > Setaria UI Pro - 开箱即用的中台前端应用解决方案
 
@@ -30,46 +30,35 @@ npm config get registry
 ## 安装步骤
 ``` bash
 # 下载工程到本地
-git clone https://github.com/ume-team/ume-emc.git
+git clone https://github.com/bluejfox/setaria-ui-pro.git
 # 进入工程目录
-cd ume-emc/src/main/webclient-source
+cd setaria-ui-pro
 # 安装项目依赖
 yarn
 ```
 
 ## 本地开发
 ``` bash
-# 在./config/dev.env.js中修改TARGET_WEBSERVICE_SERVER为自己所使用的后端服务地址
+# 在vue.config.js中修改proxy
 例:
-修改
-# TARGET_WEBSERVICE_SERVER: '"http://example.com/"'
-为
-TARGET_WEBSERVICE_SERVER: '"http://www.myservice.com/api"'
+proxy: {
+  '/ume-ems/rest/s01/': {
+    // 远程服务地址
+    target: 'http://localhost:8081',
+  },
+},
 
 # 启动服务器
-yarn run dev
+yarn serve
 ```
 
 ## 部署生产
 通过命令行工具进入ume-emc目录，执行mvn clean package。
 
 ``` bash
-1. 定义Context-Path
-  # Context-Path默认为ume-emc
-  希望修改的场合，可修改ume-emc/pom.xml中的web.context.path
-2. 构建
-  构建分为yarn和maven两种方式。
-  2.1. Yarn
-    # 通过命令行工具进入ume-emc/src/main/webclient-source目录
-    a) 执行 `yarn` 安装第三方依赖
-    b) 执行 `yarn run build` 进行打包
-    # 如果出现"BUILD SUCCESS"字样则代表构建成功
-  2.2. Maven
-    # 通过命令行工具进入ume-emc/目录
-    执行 `mvn clean package`
-    # 如果出现"BUILD SUCCESS"字样则代表构建成功
-3. 取得构建后的文件
-  构建好的文件生成在 ume-emc/target/dist目录中
+1. 执行 `yarn run build` 进行打包
+2. 取得构建后的文件
+  构建好的文件生成在 ./target/dist目录中
 ```
 
 ## 开发手册
@@ -85,22 +74,6 @@ yarn run dev
 
 ## 开发前需要掌握的知识
 * [ES6](http://es6.ruanyifeng.com/)
-
-## ToDo
-
-### 公共模块
-- [X] 鉴权
-- [X] 消息处理
-- [X] UME服务调用
-- [X] 用户状态管理
-- [X] 菜单控件作成
-- [X] 元数据列表控件作成
-- [X] 元数据表单控件作成
-
-### 业务画面
-- [ ] 元数据查询画面(包含元数据删除功能)
-- [X] 元数据新增画面
-- [X] 元数据修改画面
 
 ## License
 MIT
