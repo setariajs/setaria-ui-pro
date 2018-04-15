@@ -1,0 +1,145 @@
+<template>
+  <ume-card>
+    <ume-template-base-search
+      class="search-list"
+      ref="searchDataList"
+      :condition-schema="conditionSchema"
+      :condition="condition"
+      :result-schema="resultSchema"
+      :result-ui-schema="resultUiSchema"
+      :get-result="doGetResult"
+      pagination="full"
+      :page-size="pageSize"
+      pagination-layout="prev, pager, next, jumper"
+      result-column-auto-align>
+      <div slot="tableButton">
+        <ume-button size="small" type="primary" plain @click="doCreate">新增</ume-button>
+      </div>
+      <!-- 行数据的控制按钮 -->
+      <div slot="tableRowButton" slot-scope="props">
+        <ume-button type="text" @click="doUpdate(props.row)">修改</ume-button>
+        <span class="button-separator">|</span>
+        <ume-button type="text" @click="doDelete(props.row)">删除</ume-button>
+      </div>
+      <!-- 可对数据的显示格式进行自定义 -->
+      <template slot="columnActiveFlag" slot-scope="props">
+        <span :class="{ invalid: props.row.activeFlag === '无效' }">{{ props.row.activeFlag }}</span>
+      </template>
+    </ume-template-base-search>
+  </ume-card>
+</template>
+<style scoped>
+  .button-separator {
+    margin: 0 5px;
+  }
+  .invalid {
+    color: red;
+  }
+</style>
+<script>
+import { Message } from 'setaria';
+import { Notice } from '../../component';
+
+export default {
+  data() {
+    return {
+      // 检索条件对象
+      condition: {
+        name: '',
+        theFetchStart: 0,
+        theFetchSize: 10,
+      },
+      // 检索条件表单Schema定义
+      conditionSchema: {
+        name: {
+          type: 'string',
+          title: '用户姓名',
+        },
+      },
+      // 检索结果一览Schema定义
+      resultSchema: {
+        name: {
+          type: 'string',
+          title: '姓名',
+        },
+        gender: {
+          type: 'string',
+          title: '性别',
+        },
+        birth: {
+          type: 'string',
+          title: '出生日期',
+          format: 'date',
+        },
+        mobile: {
+          type: 'integer',
+          title: '手机号',
+        },
+        activeFlag: {
+          type: 'string',
+          title: '状态',
+        },
+      },
+      resultUiSchema: {
+        birth: {
+          'ui:minWidth': '120px',
+        },
+        mobile: {
+          'ui:minWidth': '120px',
+          'ui:headerAlign': 'right',
+        },
+      },
+      // 检索结果一览数据对象
+      tableData: [],
+      // 检索结果一览每页数据数量
+      pageSize: 10,
+      // 选中的行
+      selectionRows: [],
+    };
+  },
+  methods: {
+    /**
+     * 检索结果一览数据取得事件处理
+     * @event
+     */
+    doGetResult(val, currentPage) {
+      this.condition.theFetchStart = (currentPage === 1) ? 0 :
+        (currentPage - 1) * this.condition.theFetchSize;
+      return new Promise((resolve) => {
+        let ret = null;
+        if (currentPage === 1) {
+          ret = [
+            {
+              name: '管理员',
+              gender: '男',
+              mobile: '13910000001',
+              birth: '1979-03-08',
+              activeFlag: '有效',
+            },
+            {
+              name: '赵三',
+              gender: '男',
+              mobile: '13910000002',
+              birth: '1982-08-19',
+              activeFlag: '无效',
+            },
+          ];
+        }
+        resolve(ret);
+      });
+    },
+    doCreate() {
+      Notice.showMessage(new Message('MBM004I', ['新增']));
+    },
+    doUpdate({ name }) {
+      Notice.showMessage(new Message('MBM004I', [`修改${name}`]));
+    },
+    doDelete({ name }) {
+      Notice.showMessageBox(new Message('MBM002I', [`删除${name}`]))
+        .then(() => {
+          Notice.showMessage(new Message('MBM001I', [name, '删除']));
+        });
+    },
+  },
+};
+</script>

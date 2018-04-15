@@ -1,0 +1,15 @@
+System Initial Sequence
+
+sequenceDiagram
+index.html->> main.js: 0.加载Web应用入口脚本
+main.js->> Element.UI: 1.加载ElementUI控件（语言zh-CN）
+main.js->> VueResource: 2.加载Service模块(vue-resource)
+VueResource->> resource/interceptors: 3.加载全局Restful服务调用钩子
+main.js->> router: 4.加载路由组件
+router->> VueRouter: 5.加载Vue-Router
+router->> config/router: 6.加载业务路由定义
+router->> router: 7.注册用于判断用户是否登录的全局路由钩子
+main.js->> App.vue: 8.初始化顶层组件
+App.vue->> VueRouter: 9.执行路由匹配
+VueRouter->> config/router: 10.根据当前Url查找对应路由记录
+VueRouter->> Biz.vue: 11.初始化路由记录中定义的组件
