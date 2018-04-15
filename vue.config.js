@@ -1,4 +1,5 @@
 module.exports = {
+  baseUrl: '/setaria-ui-pro',
   lintOnSave: true,
   productionSourceMap: false,
   devServer: {
