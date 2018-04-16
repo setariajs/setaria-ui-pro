@@ -1,7 +1,12 @@
 <template>
   <ume-card>
-    <ume-form ref="form"
-      :model="form" :rules="rules" label-width="80px" @submit="onSubmit" class="form">
+    <ume-form
+      ref="form"
+      :model="form"
+      :rules="rules"
+      label-width="80px"
+      @submit="onSubmit"
+      class="form">
       <ume-form-item label="活动名称" prop="name">
         <ume-input v-model="form.name"></ume-input>
       </ume-form-item>
@@ -147,16 +152,8 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          console.log('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-        return true;
-      });
+    onSubmit() {
+      console.log('submit!');
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
