@@ -8,7 +8,7 @@ import List from '@/page/list/List';
 import DynamicList from '@/page/list/DynamicList';
 
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'title'],
   routes: [
     {
       path: '/login',
