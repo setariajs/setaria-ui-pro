@@ -36,6 +36,27 @@
       <div class="system-layout-header">
         <span class="nav-container">
           <span class="nav-item">
+            <ume-popover
+              ref="remindPopover"
+              placement="bottom"
+              trigger="click">
+              <ume-tabs v-model="remindPopoverActiveName">
+                <ume-tab-pane label="通知(5)" name="notification">
+                  通知
+                </ume-tab-pane>
+                <ume-tab-pane label="消息(3)" name="message">
+                  消息
+                </ume-tab-pane>
+                <ume-tab-pane label="待办(2)" name="todo">
+                  待办
+                </ume-tab-pane>
+              </ume-tabs>
+            </ume-popover>
+            <ume-badge :value="10" :max="99" class="remind-badge" v-popover:remindPopover>
+              <i class="fa fa-bell-o"></i>
+            </ume-badge>
+          </span>
+          <span class="nav-item">
             <ume-dropdown @command="doUserCommandSelect">
               <span class="el-dropdown-link">
                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ userName }}
@@ -115,7 +136,7 @@
     float: right;
   }
   .nav-item + .nav-item {
-    margin-left: 10px;
+    margin-left: 30px;
   }
   .nav-item .el-dropdown-link {
     font-size: 16px;
@@ -177,6 +198,9 @@
     color: #fff;
     margin-right: 5px;
   }
+  .remind-badge {
+    line-height: 0;
+  }
 </style>
 <script>
 import { config, util } from 'setaria';
@@ -218,6 +242,7 @@ export default {
           ],
         },
       ],
+      remindPopoverActiveName: 'message',
     };
   },
   /**
