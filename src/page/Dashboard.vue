@@ -227,6 +227,9 @@
   .nav-item .el-dropdown-link {
     font-size: 16px;
   }
+  .nav-item .el-dropdown-link > i {
+    font-size: 18px;
+  }
   .user-command-option {
     font-size: 14px;
     top: 60px !important;
@@ -288,7 +291,7 @@
     line-height: 0;
   }
   .remind-popover {
-    padding: 0;
+    padding: 0 !important;
     width: 327px;
   }
   .remind-popover .el-tabs__header {
