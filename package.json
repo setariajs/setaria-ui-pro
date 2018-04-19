@@ -13,7 +13,7 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "setaria": "^0.2.3",
-    "setaria-ui": "^1.2.4",
+    "setaria-ui": "^1.3.3",
     "vue": "^2.5.13"
   },
   "devDependencies": {

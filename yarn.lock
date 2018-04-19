@@ -5739,9 +5739,9 @@ set-value@^2.0.0:
     is-plain-object "^2.0.3"
     split-string "^3.0.1"
 
-setaria-ui@^1.2.4:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/setaria-ui/-/setaria-ui-1.2.5.tgz#33488a40ab959572587f15788ea3e080d66d70f0"
+setaria-ui@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/setaria-ui/-/setaria-ui-1.3.3.tgz#0d557f27c7fe542c75a882f93a2d914a8d39bf3e"
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"

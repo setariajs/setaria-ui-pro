@@ -39,20 +39,106 @@
             <ume-popover
               ref="remindPopover"
               placement="bottom"
-              trigger="click">
-              <ume-tabs v-model="remindPopoverActiveName">
-                <ume-tab-pane label="通知(5)" name="notification">
-                  通知
+              trigger="click"
+              popper-class="remind-popover"
+              @show="doRemindPopoverShow">
+              <ume-tabs class="remind-popover-tabs" v-model="remindPopoverActiveName"
+                v-loading="remindPopoverLoading"
+                element-loading-text="拼命加载中"
+                element-loading-spinner="el-icon-loading">
+                <ume-tab-pane
+                  :label="`通知(${notificationArray.length})`"
+                  name="notification">
+                  <ume-list v-if="notificationArray.length > 0">
+                    <ume-list-item
+                      v-for="n in notificationArray" :key="n.title">
+                      <el-list-item-meta
+                        :title="n.title" :description="n.description" slot="meta">
+                        <span slot="avatar">
+                          <el-button circle size="small" :icon="n.type" :type="n.importance">
+                          </el-button>
+                        </span>
+                      </el-list-item-meta>
+                    </ume-list-item>
+                    <div slot="footer" class="remind-list-footer">
+                      <span @click="doClearRemind('notification')">清空通知</span>
+                    </div>
+                  </ume-list>
+                  <div class="remind-no-data" v-else>
+                    <div>
+                      <div>
+                        <i class="el-icon-bell"></i>
+                      </div>
+                      <div>
+                        您已查看所有通知
+                      </div>
+                    </div>
+                  </div>
                 </ume-tab-pane>
-                <ume-tab-pane label="消息(3)" name="message">
-                  消息
+                <ume-tab-pane :label="`消息(${messageArray.length})`" name="message">
+                  <ume-list v-if="messageArray.length > 0">
+                    <ume-list-item
+                      v-for="(m, index) in messageArray"
+                      :key="index">
+                      <el-list-item-meta
+                        :title="getRemindMessageTitle(m)"
+                        :description="m.message" slot="meta">
+                        <span slot="avatar">
+                          <img :src="m.userImg" class="remind-tabs-message__user-icon"/>
+                        </span>
+                      </el-list-item-meta>
+                    </ume-list-item>
+                    <div slot="footer" class="remind-list-footer">
+                      <span @click="doClearRemind('message')">清空消息</span>
+                    </div>
+                  </ume-list>
+                  <div class="remind-no-data" v-else>
+                    <div>
+                      <div>
+                        <i class="el-icon-message"></i>
+                      </div>
+                      <div>
+                        您已查看所有消息
+                      </div>
+                    </div>
+                  </div>
                 </ume-tab-pane>
-                <ume-tab-pane label="待办(2)" name="todo">
-                  待办
+                <ume-tab-pane :label="`待办(${todoArray.length})`" name="todo">
+                  <ume-list v-if="todoArray.length > 0">
+                    <ume-list-item
+                      v-for="(t, index) in todoArray"
+                      :key="index">
+                      <el-list-item-meta
+                        :description="t.description" slot="meta">
+                        <div slot="title">
+                          {{ t.title }}
+                          <div style="float:right">
+                            <ume-tag size="small" :type="t.status === 'ready' ? 'info' : ''">
+                              {{ t.status === 'ready' ? '未开始' : '进行中' }}
+                            </ume-tag>
+                          </div>
+                        </div>
+                      </el-list-item-meta>
+                    </ume-list-item>
+                    <div slot="footer" class="remind-list-footer">
+                      <span @click="doClearRemind('todo')">清空待办</span>
+                    </div>
+                  </ume-list>
+                  <div class="remind-no-data" v-else>
+                    <div>
+                      <div>
+                        <i class="el-icon-view"></i>
+                      </div>
+                      <div>
+                        您已完成所有待办事项
+                      </div>
+                    </div>
+                  </div>
                 </ume-tab-pane>
               </ume-tabs>
             </ume-popover>
-            <ume-badge :value="10" :max="99" class="remind-badge" v-popover:remindPopover>
+            <ume-badge :value="remindCount"
+              :max="99" class="remind-badge" v-popover:remindPopover>
               <i class="fa fa-bell-o"></i>
             </ume-badge>
           </span>
@@ -201,9 +287,50 @@
   .remind-badge {
     line-height: 0;
   }
+  .remind-popover {
+    padding: 0;
+    width: 327px;
+  }
+  .remind-popover .el-tabs__header {
+    margin-bottom: 0;
+  }
+  .remind-popover .el-tabs__nav-scroll,
+  .remind-popover .el-list-item {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .remind-popover .el-list > * {
+    cursor: pointer;
+  }
+  .remind-popover .el-list > .el-list-item:hover {
+    background-color: #e6f7ff;
+  }
+  .remind-popover .el-list .remind-tabs-message__user-icon {
+    height: 30px;
+  }
+  .remind-popover .el-list .remind-list-footer {
+    text-align: center;
+  }
+  .remind-popover .el-list .el-list-item-meta-description {
+    font-size: 13px !important;
+  }
+  .remind-popover .remind-no-data {
+    text-align: center;
+    display: flex;
+    height: 200px;
+    align-items: center;
+  }
+  .remind-popover .remind-no-data i {
+    font-size: 48px;
+    color: rgb(0, 0,0, 0.25);
+  }
+  .remind-popover .remind-no-data > div {
+    flex: 1;
+  }
 </style>
 <script>
-import { config, util } from 'setaria';
+import { config, Message, util } from 'setaria';
+import { Notice } from '@/component';
 import UserResource from '@/model/resource/UserResource';
 
 export default {
@@ -242,7 +369,12 @@ export default {
           ],
         },
       ],
-      remindPopoverActiveName: 'message',
+      remindPopoverActiveName: 'notification',
+      remindPopoverLoading: false,
+      remindCount: 8,
+      notificationArray: [],
+      messageArray: [],
+      todoArray: [],
     };
   },
   /**
@@ -317,6 +449,96 @@ export default {
       this.isCollapse = !this.isCollapse;
     },
     /**
+     * 提醒清空按钮点击事件处理
+     */
+    doClearRemind(type) {
+      let remindTypeLabel = '';
+      let count = this.remindCount;
+      if (type === 'notification') {
+        remindTypeLabel = '通知';
+        count -= this.notificationArray.length;
+        this.notificationArray = [];
+      } else if (type === 'message') {
+        remindTypeLabel = '消息';
+        count -= this.messageArray.length;
+        this.messageArray = [];
+      } else if (type === 'todo') {
+        remindTypeLabel = '待办';
+        count -= this.todoArray.length;
+        this.todoArray = [];
+      }
+      this.remindCount = count < 0 ? 0 : count;
+      Notice.showMessage({
+        type: 'success',
+        message: new Message('MBM005S', [remindTypeLabel]).getMessage(),
+      });
+    },
+    /**
+     * 提醒弹出框显示事件处理
+     */
+    doRemindPopoverShow() {
+      this.remindPopoverLoading = true;
+      setTimeout(() => {
+        this.notificationArray = [
+          {
+            title: '你收到了12份新周报',
+            description: '1周前',
+            type: 'el-icon-message',
+            importance: 'danger',
+          },
+          {
+            title: '这种模板可区分多种通知类型',
+            description: '1周前',
+            type: 'el-icon-circle-plus',
+            importance: 'primary',
+          },
+          {
+            title: '左侧图标用于区分不同类型',
+            description: '1周前',
+            type: 'el-icon-star-off',
+            importance: 'info',
+          },
+        ];
+        this.messageArray = [
+          {
+            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
+            userName: '杨颖',
+            type: 'comment',
+            message: '描述信息描述信息描述信息',
+            date: '1个月前',
+          },
+          {
+            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
+            userName: '吴迪',
+            type: 'reply',
+            message: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
+            date: '1个月前',
+          },
+          {
+            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
+            userName: '系统管理员',
+            type: 'send',
+            title: '标题',
+            message: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
+            date: '1个月前',
+          },
+        ];
+        this.todoArray = [
+          {
+            title: '任务名称',
+            status: 'ready',
+            description: '任务需要在 2018-05-20 前启动',
+          },
+          {
+            title: '版本发布',
+            status: 'on-going',
+            description: '需要在 2018-05-20 前完成代码变更任务',
+          },
+        ];
+        this.remindPopoverLoading = false;
+      }, 2000);
+    },
+    /**
        * 注销按钮点击事件处理
        * @event
        */
@@ -333,6 +555,36 @@ export default {
        */
     forwardToLogin() {
       this.$router.forwardTo('Login');
+    },
+    /**
+     * 根据通知类型取得对应的图标样式
+     */
+    getNotificationAvatarIconClass(val) {
+      const ret = [];
+      // avatar icon
+      switch (val.type) {
+        case 'message':
+          ret.push('el-icon-message');
+          break;
+        case 'bookmark':
+          ret.push('el-icon-star-on');
+          break;
+        default:
+          ret.push('el-icon-info');
+      }
+      return ret;
+    },
+    getRemindMessageTitle(val) {
+      if (val.title) {
+        return val.title;
+      }
+      let actDescription = '';
+      if (val.type === 'reply') {
+        actDescription = ' 回复了你';
+      } else if (val.type === 'comment') {
+        actDescription = ' 评论了你';
+      }
+      return `${val.userName} ${actDescription}`;
     },
   },
   /**
