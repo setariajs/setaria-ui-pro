@@ -4,10 +4,18 @@ html, body {
   height: 100%;
 }
 body {
-  font-family: "Helvetica Neue For Number,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif";
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
   overflow: auto;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+}
+
+.el-menu-item, .el-submenu__title,
+.el-submenu .el-menu-item {
+  height: 48px;
+  line-height: 48px;
 }
 
 .el-form .el-form-item__content .el-select {

@@ -1,64 +1,64 @@
 <template>
-  <ume-card>
-    <ume-form
+  <el-card>
+    <el-form
       ref="form"
       :model="form"
       :rules="rules"
       label-width="80px"
       @submit="onSubmit"
       class="form">
-      <ume-form-item label="活动名称" prop="name">
-        <ume-input v-model="form.name"></ume-input>
-      </ume-form-item>
-      <ume-form-item label="活动区域" prop="region">
-        <ume-select v-model="form.region" placeholder="请选择活动区域">
-          <ume-option label="区域一" value="shanghai"></ume-option>
-          <ume-option label="区域二" value="beijing"></ume-option>
-        </ume-select>
-      </ume-form-item>
-      <ume-form-item label="活动时间" required>
-        <ume-col :span="11">
-          <ume-form-item prop="date1">
-            <ume-date-picker
+      <el-form-item label="活动名称" prop="name">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="活动区域" prop="region">
+        <el-select v-model="form.region" placeholder="请选择活动区域">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="活动时间" required>
+        <el-col :span="11">
+          <el-form-item prop="date1">
+            <el-date-picker
               type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;">
-            </ume-date-picker>
-          </ume-form-item>
-        </ume-col>
-        <ume-col class="line" :span="2">-</ume-col>
-        <ume-col :span="11">
-          <ume-form-item prop="date2">
-            <ume-time-picker
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col class="line" :span="2">-</el-col>
+        <el-col :span="11">
+          <el-form-item prop="date2">
+            <el-time-picker
               type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;">
-            </ume-time-picker>
-          </ume-form-item>
-        </ume-col>
-      </ume-form-item>
-      <ume-form-item label="即时配送" prop="delivery">
-        <ume-switch v-model="form.delivery"></ume-switch>
-      </ume-form-item>
-      <ume-form-item label="活动性质" prop="type">
-        <ume-checkbox-group v-model="form.type">
-          <ume-checkbox label="美食/餐厅线上活动" name="type"></ume-checkbox>
-          <ume-checkbox label="地推活动" name="type"></ume-checkbox>
-          <ume-checkbox label="线下主题活动" name="type"></ume-checkbox>
-          <ume-checkbox label="单纯品牌曝光" name="type"></ume-checkbox>
-        </ume-checkbox-group>
-      </ume-form-item>
-      <ume-form-item label="特殊资源" prop="resource">
-        <ume-radio-group v-model="form.resource">
-          <ume-radio label="线上品牌商赞助"></ume-radio>
-          <ume-radio label="线下场地免费"></ume-radio>
-        </ume-radio-group>
-      </ume-form-item>
-      <ume-form-item label="活动形式">
-        <ume-input type="textarea" v-model="form.desc"></ume-input>
-      </ume-form-item>
-      <ume-form-item>
-        <ume-button type="primary" native-type="submit">立即创建</ume-button>
-        <ume-button>取消</ume-button>
-      </ume-form-item>
-    </ume-form>
-  </ume-card>
+            </el-time-picker>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="即时配送" prop="delivery">
+        <el-switch v-model="form.delivery"></el-switch>
+      </el-form-item>
+      <el-form-item label="活动性质" prop="type">
+        <el-checkbox-group v-model="form.type">
+          <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+          <el-checkbox label="地推活动" name="type"></el-checkbox>
+          <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+          <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item label="特殊资源" prop="resource">
+        <el-radio-group v-model="form.resource">
+          <el-radio label="线上品牌商赞助"></el-radio>
+          <el-radio label="线下场地免费"></el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="活动形式">
+        <el-input type="textarea" v-model="form.desc"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" native-type="submit">立即创建</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 <style scoped>
   .form {

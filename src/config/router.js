@@ -1,6 +1,8 @@
-import Dashboard from '@/page/Dashboard';
+import Main from '@/page/Main';
 import Login from '@/page/Login';
 import PageNotFound from '@/page/PageNotFound';
+import Analysis from '@/page/dashboard/Analysis';
+import Dashboard from '@/page/dashboard/Dashboard';
 import Form from '@/page/form/Form';
 import BasicForm from '@/page/form/BasicForm';
 import DynamicForm from '@/page/form/DynamicForm';
@@ -18,10 +20,24 @@ export default {
     },
     {
       path: '/',
-      name: 'Dashboard',
+      name: 'Main',
       meta: { title: '首页' },
-      component: Dashboard,
+      component: Main,
       children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          meta: { title: 'dashboard' },
+          component: Dashboard,
+          children: [
+            {
+              path: 'analysis',
+              name: 'Analysis',
+              meta: { title: '分析页' },
+              component: Analysis,
+            },
+          ],
+        },
         {
           path: 'list',
           name: 'List',

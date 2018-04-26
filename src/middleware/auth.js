@@ -9,7 +9,7 @@ export default function ({ to }) {
       const { path } = to;
       return {
         name: 'Login',
-        query: { path },
+        query: { redirect: path },
       };
     }
   }

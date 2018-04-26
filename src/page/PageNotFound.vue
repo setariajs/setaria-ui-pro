@@ -1,13 +1,13 @@
 <template>
   <div class="main">
-    <ume-row type="flex" justify="center" align="middle" class="text-container">
+    <el-row type="flex" justify="center" align="middle" class="text-container">
       <p class="title">{{ msg }}</p>
-    </ume-row>
-    <ume-row type="flex" justify="space-around" class="control">
-      <ume-col :span="8" class="back-button">
-        <ume-button type="primary" size="large" @click="back">返回首页</ume-button>
-      </ume-col>
-    </ume-row>
+    </el-row>
+    <el-row type="flex" justify="space-around" class="control">
+      <el-col :span="8" class="back-button">
+        <el-button type="primary" size="large" @click="back">返回首页</el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>

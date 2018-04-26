@@ -1,8 +1,8 @@
 <template>
-  <ume-card>
-    <ume-row type="flex" justify="center">
-      <ume-col :span="20">
-        <ume-dynamic-form
+  <el-card>
+    <el-row type="flex" justify="center">
+      <el-col :span="20">
+        <el-dynamic-form
           :model="formData"
           :schema="schema"
           :ui-schema="uiSchema"
@@ -10,13 +10,13 @@
           :columns="columns"
           @submit="doSubmit">
           <div slot="button" class="form-button-container">
-            <ume-button class="form-button" type="primary" native-type="submit">保存</ume-button>
-            <ume-button class="form-button" @click="doCancel">返回</ume-button>
+            <el-button class="form-button" type="primary" native-type="submit">保存</el-button>
+            <el-button class="form-button" @click="doCancel">返回</el-button>
           </div>
-        </ume-dynamic-form>
-      </ume-col>
-    </ume-row>
-  </ume-card>
+        </el-dynamic-form>
+      </el-col>
+    </el-row>
+  </el-card>
 </template>
 <style scoped>
   .form-button-container {

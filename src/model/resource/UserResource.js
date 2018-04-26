@@ -1,14 +1,17 @@
-import Setaria, { storeTypes, util } from 'setaria';
+import Setaria, { Storage, storeTypes, util } from 'setaria';
 // import UmeHttp from '../UmeHttp';
+
+const LOCAL_AUTHORITY_KEY = 'setaria-pro-authority';
 
 export default class User {
   /**
    * 登录
    * @param  {String}  userId   用户Id
    * @param  {String}  password 密码
+   * @param  {Boolean}  autoLogin 自动登录
    * @return {Promise}
    */
-  static login(userId, password) {
+  static login(userId, password, autoLogin) {
     return new Promise((resolve, reject) => {
       // 调用鉴权服务
       setTimeout(() => {
@@ -19,7 +22,12 @@ export default class User {
             },
           };
           Setaria.plugin.store.commit(storeTypes.SET_USER, userInfo);
-          Setaria.plugin.store.commit(storeTypes.SET_TOKEN, 'edbc545993283dc8e18b8e069ee9776e1523539082028');
+          // Service Token
+          // Setaria.plugin.store.commit(storeTypes.SET_TOKEN,
+          //   'edbc545993283dc8e18b8e069ee9776e1523539082028');
+          if (autoLogin) {
+            Storage.setLocalItem(LOCAL_AUTHORITY_KEY, userInfo);
+          }
           resolve(userInfo);
         } else {
           const err = {
@@ -46,6 +54,7 @@ export default class User {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve();
+        Storage.clearLocal(LOCAL_AUTHORITY_KEY);
       }, 500);
     });
     // return UmeHttp.invoke('EMS00002', [userId]);
@@ -66,7 +75,11 @@ export default class User {
    * @return {Boolean} 当前用户已经登陆的场合，返回true
    */
   static isLogin() {
-    return !util.isEmpty(Setaria.plugin.store.getters[storeTypes.GET_TOKEN]);
+    const userInfo = Storage.getLocalItem(LOCAL_AUTHORITY_KEY);
+    if (!util.isEmpty(userInfo)) {
+      Setaria.plugin.store.commit(storeTypes.SET_USER, userInfo);
+    }
+    return !util.isEmpty(Setaria.plugin.store.getters[storeTypes.GET_USER]);
   }
 
   /**

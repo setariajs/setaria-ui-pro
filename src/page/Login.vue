@@ -1,28 +1,34 @@
 <template>
-  <ume-row type="flex" justify="center" align="middle" class="login-container">
-    <ume-col :span="5" class="login-form">
+  <el-row type="flex" justify="center" align="middle" class="login-container">
+    <el-col :span="5" class="login-form">
       <div class="login-system-title">
         <span class="title">{{ appTitle }}</span>
       </div>
-      <ume-form :model="loginForm" :rules="rules" ref="loginForm" @submit="doSubmit">
-        <ume-form-item prop="loginId">
-          <ume-input v-model="loginForm.loginId" placeholder="admin" autofocus></ume-input>
-        </ume-form-item>
-        <ume-form-item prop="password">
-          <ume-input type="password" v-model="loginForm.password" placeholder="123456"></ume-input>
-        </ume-form-item>
-        <ume-form-item class="login-button-container">
-          <ume-button type="primary" class="login-button" native-type="submit">登录</ume-button>
-        </ume-form-item>
-      </ume-form>
-    </ume-col>
-  </ume-row>
+      <el-form :model="loginForm" :rules="rules" ref="loginForm" @submit="doSubmit">
+        <el-form-item prop="loginId">
+          <el-input v-model="loginForm.loginId" placeholder="admin" autofocus></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password" v-model="loginForm.password" placeholder="123456"></el-input>
+        </el-form-item>
+        <el-form-item prop="autoLogin" class="auto-login">
+          <el-checkbox label="自动登录" v-model="loginForm.autoLogin"/>
+        </el-form-item>
+        <el-form-item class="login-button-container">
+          <el-button type="primary" class="login-button" native-type="submit">登录</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 <style scoped>
   .login-container {
-    height: 100%;
-    background-color: #f8f8f8;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+    min-height: 100%;
+    background-image: url(../assets/login-background.svg);
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+    background-color: #f0f2f5;
   }
   .login-system-title {
     height: 40px;
@@ -35,16 +41,16 @@
   }
   .title {
     vertical-align: text-bottom;
-    font-size: 18px;
+    font-size: 24px;
     text-transform: uppercase;
     display: inline-block;
     color: #666;
   }
   .login-form {
-    min-width: 320px;
-    background-color: #FCFCFD;
-    padding: 20px;
-    border-radius: 10px;
+    width: 368px;
+  }
+  .auto-login {
+    margin: -5px 0;
   }
   .login-button-container {
     margin-top: 20px;
@@ -57,6 +63,8 @@
 <script>
 import { config } from 'setaria';
 import UserResource from '@/model/resource/UserResource';
+
+const WELCOM_PAGE_PATH = '/dashboard/analysis';
 
 export default {
   /**
@@ -84,6 +92,7 @@ export default {
       loginForm: {
         loginId: '',
         password: '',
+        autoLogin: true,
       },
     };
   },
@@ -110,10 +119,14 @@ export default {
        * @event
        */
     doSubmit() {
-      UserResource.login(this.loginForm.loginId, this.loginForm.password)
+      const { loginId, password, autoLogin } = this.loginForm;
+      UserResource.login(loginId, password, autoLogin)
         .then(() => {
-          const path = this.$route.query.path || '/';
-          this.$router.push({ path });
+          let redirect = this.$route.query.redirect || WELCOM_PAGE_PATH;
+          if (redirect === '/') {
+            redirect = WELCOM_PAGE_PATH;
+          }
+          this.$router.push({ path: redirect });
         });
     },
   },

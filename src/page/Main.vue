@@ -12,7 +12,7 @@
           <i class="fa fa-angle-double-right" aria-hidden="true" v-if="isCollapse"></i>
           <i class="fa fa-angle-double-left" aria-hidden="true" v-else></i>
         </div>
-        <ume-menu
+        <el-menu
           :style="{width: navMenuWidth}"
           router
           :collapse="isCollapse"
@@ -20,37 +20,37 @@
           background-color="#324157"
           text-color="#fff"
           active-text-color="#ffd04b">
-          <ume-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
+          <el-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
             <template slot="title">
               <i class="menu-icon fa" :class="subMenu.className" aria-hidden="true"></i>
               <span>{{ subMenu.name }}</span>
             </template>
-            <ume-menu-item v-for="menu in subMenu.children" :index="menu.link" :key="menu.link">
+            <el-menu-item v-for="menu in subMenu.children" :index="menu.link" :key="menu.link">
               <span slot="title">{{ menu.name }}</span>
-            </ume-menu-item>
-          </ume-submenu>
-        </ume-menu>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
       </div>
     </div>
     <div class="system-layout system-layout-content" :style="{marginLeft: navMenuWidth}">
       <div class="system-layout-header">
         <span class="nav-container">
           <span class="nav-item">
-            <ume-popover
+            <el-popover
               ref="remindPopover"
               placement="bottom"
               trigger="click"
               popper-class="remind-popover"
               @show="doRemindPopoverShow">
-              <ume-tabs class="remind-popover-tabs" v-model="remindPopoverActiveName"
+              <el-tabs class="remind-popover-tabs" v-model="remindPopoverActiveName"
                 v-loading="remindPopoverLoading"
                 element-loading-text="拼命加载中"
                 element-loading-spinner="el-icon-loading">
-                <ume-tab-pane
+                <el-tab-pane
                   :label="`通知(${notificationArray.length})`"
                   name="notification">
-                  <ume-list v-if="notificationArray.length > 0">
-                    <ume-list-item
+                  <el-list v-if="notificationArray.length > 0">
+                    <el-list-item
                       v-for="n in notificationArray" :key="n.title">
                       <el-list-item-meta
                         :title="n.title" :description="n.description" slot="meta">
@@ -59,11 +59,11 @@
                           </el-button>
                         </span>
                       </el-list-item-meta>
-                    </ume-list-item>
+                    </el-list-item>
                     <div slot="footer" class="remind-list-footer">
                       <span @click="doClearRemind('notification')">清空通知</span>
                     </div>
-                  </ume-list>
+                  </el-list>
                   <div class="remind-no-data" v-else>
                     <div>
                       <div>
@@ -74,10 +74,10 @@
                       </div>
                     </div>
                   </div>
-                </ume-tab-pane>
-                <ume-tab-pane :label="`消息(${messageArray.length})`" name="message">
-                  <ume-list v-if="messageArray.length > 0">
-                    <ume-list-item
+                </el-tab-pane>
+                <el-tab-pane :label="`消息(${messageArray.length})`" name="message">
+                  <el-list v-if="messageArray.length > 0">
+                    <el-list-item
                       v-for="(m, index) in messageArray"
                       :key="index">
                       <el-list-item-meta
@@ -87,11 +87,11 @@
                           <img :src="m.userImg" class="remind-tabs-message__user-icon"/>
                         </span>
                       </el-list-item-meta>
-                    </ume-list-item>
+                    </el-list-item>
                     <div slot="footer" class="remind-list-footer">
                       <span @click="doClearRemind('message')">清空消息</span>
                     </div>
-                  </ume-list>
+                  </el-list>
                   <div class="remind-no-data" v-else>
                     <div>
                       <div>
@@ -102,10 +102,10 @@
                       </div>
                     </div>
                   </div>
-                </ume-tab-pane>
-                <ume-tab-pane :label="`待办(${todoArray.length})`" name="todo">
-                  <ume-list v-if="todoArray.length > 0">
-                    <ume-list-item
+                </el-tab-pane>
+                <el-tab-pane :label="`待办(${todoArray.length})`" name="todo">
+                  <el-list v-if="todoArray.length > 0">
+                    <el-list-item
                       v-for="(t, index) in todoArray"
                       :key="index">
                       <el-list-item-meta
@@ -113,17 +113,17 @@
                         <div slot="title">
                           {{ t.title }}
                           <div style="float:right">
-                            <ume-tag size="small" :type="t.status === 'ready' ? 'info' : ''">
+                            <el-tag size="small" :type="t.status === 'ready' ? 'info' : ''">
                               {{ t.status === 'ready' ? '未开始' : '进行中' }}
-                            </ume-tag>
+                            </el-tag>
                           </div>
                         </div>
                       </el-list-item-meta>
-                    </ume-list-item>
+                    </el-list-item>
                     <div slot="footer" class="remind-list-footer">
                       <span @click="doClearRemind('todo')">清空待办</span>
                     </div>
-                  </ume-list>
+                  </el-list>
                   <div class="remind-no-data" v-else>
                     <div>
                       <div>
@@ -134,37 +134,37 @@
                       </div>
                     </div>
                   </div>
-                </ume-tab-pane>
-              </ume-tabs>
-            </ume-popover>
-            <ume-badge :value="remindCount"
+                </el-tab-pane>
+              </el-tabs>
+            </el-popover>
+            <el-badge :value="remindCount"
               :max="99" class="remind-badge" v-popover:remindPopover>
               <i class="fa fa-bell-o"></i>
-            </ume-badge>
+            </el-badge>
           </span>
           <span class="nav-item">
-            <ume-dropdown @command="doUserCommandSelect">
+            <el-dropdown @command="doUserCommandSelect">
               <span class="el-dropdown-link">
                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ userName }}
               </span>
-              <ume-dropdown-menu
+              <el-dropdown-menu
                 slot="dropdown"
                 class="user-command-option">
-                <ume-dropdown-item command="logout">退出系统</ume-dropdown-item>
-              </ume-dropdown-menu>
-            </ume-dropdown>
+                <el-dropdown-item command="logout">退出系统</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </span>
         </span>
       </div>
       <div class="system-layout-page-content">
-        <ume-breadcrumb separator="/" class="system-bread-crumb">
-          <ume-breadcrumb-item
+        <el-breadcrumb separator="/" class="system-bread-crumb">
+          <el-breadcrumb-item
             v-for="crumb in breadCrumb"
             :to="crumb.path ? { path: crumb.path } : undefined"
             :key="crumb.name">
             {{ crumb.meta.title }}
-          </ume-breadcrumb-item>
-        </ume-breadcrumb>
+          </el-breadcrumb-item>
+        </el-breadcrumb>
         <router-view></router-view>
       </div>
       <div class="system-layout-footer">
@@ -347,6 +347,16 @@ export default {
       isCollapse: false,
       activeMenu: '',
       menuList: [
+        {
+          name: 'dashboard',
+          className: 'fa-tachometer',
+          children: [
+            {
+              name: '分析页',
+              link: '/dashboard/analysis',
+            },
+          ],
+        },
         {
           name: '列表页',
           className: 'fa-table',
