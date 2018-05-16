@@ -11,8 +11,6 @@ import Trend from './trend';
 
 const customComponents = {
   ...Chart,
-  LoadingIndicator,
-  Notice,
   Trend,
 };
 

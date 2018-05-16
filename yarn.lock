@@ -1810,7 +1810,11 @@ copy-webpack-plugin@^4.5.0:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-core-js@^2.4.0, core-js@^2.5.3:
+core-js@^2.4.0:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.6.tgz#0fe6d45bf3cac3ac364a9d72de7576f4eb221b9d"
+
+core-js@^2.5.3:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
 
@@ -6080,8 +6084,8 @@ set-value@^2.0.0:
     split-string "^3.0.1"
 
 setaria-ui@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/setaria-ui/-/setaria-ui-1.3.3.tgz#0d557f27c7fe542c75a882f93a2d914a8d39bf3e"
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/setaria-ui/-/setaria-ui-1.3.8.tgz#94e50a9ed4d4adb9be443d0d60fe31aea534d841"
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"

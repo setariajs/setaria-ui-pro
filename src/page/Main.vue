@@ -13,6 +13,7 @@
           <i class="fa fa-angle-double-left" aria-hidden="true" v-else></i>
         </div>
         <el-menu
+          class="system-nav-menu"
           :style="{width: navMenuWidth}"
           router
           :collapse="isCollapse"
@@ -250,7 +251,7 @@
     -webkit-flex: auto;
     -ms-flex: auto;
     flex: auto;
-    padding: 10px;
+    padding: 20px;
   }
   .system-title-container {
     height: 64px;
@@ -331,6 +332,12 @@
     flex: 1;
   }
 </style>
+<style lang="scss" scoped>
+  .system-nav-menu {
+    border-right: 1px solid #324157;
+  }
+</style>
+
 <script>
 import { config, Message, util } from 'setaria';
 import { Notice } from '@/component';
