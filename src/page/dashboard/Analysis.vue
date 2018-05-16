@@ -51,7 +51,8 @@
         </el-chart-card>
       </el-col>
     </el-row>
-    <el-card class="analysis_sales" :tab-list="salesTabList" :active-tab-name.sync="salesActiveTabName">
+    <el-card class="analysis_sales" :tab-list="salesTabList"
+      :active-tab-name.sync="salesActiveTabName">
       <el-row type="flex" v-if="salesActiveTabName === 'sales'">
         <el-col :xl="16" :lg="16" :md="12" :sm="24" :xs="24">
           <el-bar title="销售额趋势" :data="barData" :height="300"></el-bar>
