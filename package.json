@@ -7,7 +7,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
@@ -25,6 +26,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.5",
+    "gh-pages": "^1.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.16"
