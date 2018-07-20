@@ -2,7 +2,7 @@
   <el-row type="flex" justify="center" align="middle" class="login-container">
     <el-col :span="5" class="login-form">
       <div class="system-title">
-        <img src="/logo.png" class="logo"/><span class="title">{{ appTitle }}</span>
+        <img :src="logoUrl" class="logo"/><span class="title">{{ appTitle }}</span>
       </div>
       <div class="system-desc">
         开箱即用的中台前端解决方案
@@ -73,7 +73,7 @@
 </style>
 <script>
 import Auth from '@/model/resource/Auth';
-import { getConfigValue } from '@/model/util';
+import { getConfigValue, getPublicResourceUrl } from '@/model/util';
 
 const WELCOM_PAGE_PATH = '/dashboard/analysis';
 
@@ -105,6 +105,7 @@ export default {
         password: '',
         autoLogin: true,
       },
+      logoUrl: getPublicResourceUrl('logo.png'),
     };
   },
   /**

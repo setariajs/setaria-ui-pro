@@ -6,7 +6,7 @@ export default {
   http: {
     api: {
       timeout: 60000,
-      baseURL: '/api/',
+      baseURL: 'http://47.94.254.158:5000/api/',
     },
   },
   message,
