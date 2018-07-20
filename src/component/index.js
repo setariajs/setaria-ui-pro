@@ -1,12 +1,11 @@
 import Vue from 'vue';
-import { util } from 'setaria';
 import SetariaUI from 'setaria-ui';
 import locale from 'setaria-ui/lib/locale/lang/zh-CN';
 import 'font-awesome/css/font-awesome.css';
 import 'setaria-ui/lib/theme-chalk/index.css';
+import { isEmpty } from '@/model/util';
+import '../style/default.css';
 import Chart from './chart';
-import LoadingIndicator from './loading-indicator';
-import Notice from './notice';
 import Trend from './trend';
 
 const customComponents = {
@@ -26,7 +25,7 @@ function install(VueInstance) {
   // 批量加载Setaria-UI组件
   Object.keys(SetariaUI).forEach((key) => {
     const component = SetariaUI[key];
-    if (!util.isEmpty(component.name) && component.name.indexOf('El') === 0) {
+    if (!isEmpty(component.name) && component.name.indexOf('El') === 0) {
       // 加载组件
       VueInstance.component(component.name, component);
     }
@@ -47,4 +46,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 // 加载UI组件
 Vue.use(install);
 
-export { LoadingIndicator, Notice };
+const UI = Object.assign({}, SetariaUI, {
+  install,
+});
+export default UI;

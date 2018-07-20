@@ -1,4 +1,4 @@
-import Trend from './src/trend';
+import Trend from './src/trend.vue';
 
 /* istanbul ignore next */
 Trend.install = (Vue) => {

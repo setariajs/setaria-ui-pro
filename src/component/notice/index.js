@@ -1,5 +1,5 @@
-import { util } from 'setaria';
 import { Message, MessageBox, Notification } from 'setaria-ui';
+import { isObject } from '@/model/util';
 
 /* eslint class-methods-use-this: ["error",
   { "exceptMethods": ["getTitleByMessageType"] }] */
@@ -40,7 +40,7 @@ class Notice {
     { type = 'error', message = '' },
     { duration = 3000, onClose = null } = {},
   ) {
-    const msg = util.isObject(message) ? message.toString() : message;
+    const msg = isObject(message) ? message.toString() : message;
     Message({
       type,
       title: Notice.getTitleByMessageType(type),
@@ -72,7 +72,7 @@ class Notice {
     confirmButtonText = '确定',
     cancelButtonText = '取消',
   } = {}) {
-    const msg = util.isObject(message) ? message.toString() : message;
+    const msg = isObject(message) ? message.toString() : message;
     return new Promise((resolve, reject) => {
       MessageBox({
         title: Notice.getTitleByMessageType(type),

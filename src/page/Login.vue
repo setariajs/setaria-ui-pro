@@ -1,8 +1,11 @@
 <template>
   <el-row type="flex" justify="center" align="middle" class="login-container">
     <el-col :span="5" class="login-form">
-      <div class="login-system-title">
-        <span class="title">{{ appTitle }}</span>
+      <div class="system-title">
+        <img src="/logo.png" class="logo"/><span class="title">{{ appTitle }}</span>
+      </div>
+      <div class="system-desc">
+        开箱即用的中台前端解决方案
       </div>
       <el-form :model="loginForm" :rules="rules" ref="loginForm" @submit="doSubmit">
         <el-form-item prop="loginId">
@@ -30,21 +33,29 @@
     background-size: 100%;
     background-color: #f0f2f5;
   }
-  .login-system-title {
-    height: 40px;
-    line-height: 40px;
+  .system-title {
+    height: 60px;
+    line-height: 50px;
     text-align: center;
-    margin-bottom: 24px;
   }
-  .system-logo {
-    width: 40px;
+  .system-desc {
+    font-size: 14px;
+    color: rgba(0,0,0,.45);
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .logo {
+    width: 50px;
+    vertical-align: top;
+    margin-right: 16px;
   }
   .title {
-    vertical-align: text-bottom;
-    font-size: 24px;
-    text-transform: uppercase;
-    display: inline-block;
-    color: #666;
+    font-size: 33px;
+    color: rgba(0,0,0,.85);
+    font-family: "Myriad Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    position: relative;
+    top: 2px;
   }
   .login-form {
     width: 368px;
@@ -61,8 +72,8 @@
   }
 </style>
 <script>
-import { config } from 'setaria';
-import UserResource from '@/model/resource/UserResource';
+import Auth from '@/model/resource/Auth';
+import { getConfigValue } from '@/model/util';
 
 const WELCOM_PAGE_PATH = '/dashboard/analysis';
 
@@ -106,7 +117,7 @@ export default {
        * @return {String}
        */
     appTitle() {
-      return config.env.APP_TITLE;
+      return getConfigValue('TITLE');
     },
   },
   /**
@@ -118,16 +129,16 @@ export default {
        * 登录按钮点击事件处理
        * @event
        */
-    doSubmit() {
+    async doSubmit() {
       const { loginId, password, autoLogin } = this.loginForm;
-      UserResource.login(loginId, password, autoLogin)
-        .then(() => {
-          let redirect = this.$route.query.redirect || WELCOM_PAGE_PATH;
-          if (redirect === '/') {
-            redirect = WELCOM_PAGE_PATH;
-          }
-          this.$router.push({ path: redirect });
-        });
+      const res = await Auth.login(loginId, password, autoLogin);
+      if (res) {
+        let redirect = this.$route.query.redirect || WELCOM_PAGE_PATH;
+        if (redirect === '/') {
+          redirect = WELCOM_PAGE_PATH;
+        }
+        this.$router.push({ path: redirect });
+      }
     },
   },
 };

@@ -146,7 +146,7 @@
 
 <script>
 import numeral from 'numeral';
-import { util } from 'setaria';
+import { addDateTime, formatDate } from '@/model/util';
 
 export default {
   data() {
@@ -154,7 +154,7 @@ export default {
     const beginDate = new Date();
     for (let i = 0; i < 20; i += 1) {
       miniData.push({
-        x: util.formatDate(util.addDateTime(beginDate, i, 'days'), 'YYYY-MM-DD'),
+        x: formatDate(addDateTime(beginDate, i, 'days'), 'YYYY-MM-DD'),
         y: Math.floor(Math.random() * 100) + 10,
       });
     }

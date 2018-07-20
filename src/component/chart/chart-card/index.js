@@ -1,4 +1,4 @@
-import ChartCard from './src/chart-card';
+import ChartCard from './src/chart-card.vue';
 
 /* istanbul ignore next */
 ChartCard.install = (Vue) => {

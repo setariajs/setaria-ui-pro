@@ -41,104 +41,10 @@
               ref="remindPopover"
               placement="bottom"
               trigger="click"
-              popper-class="remind-popover"
-              @show="doRemindPopoverShow">
-              <el-tabs class="remind-popover-tabs" v-model="remindPopoverActiveName"
-                v-loading="remindPopoverLoading"
-                element-loading-text="拼命加载中"
-                element-loading-spinner="el-icon-loading">
-                <el-tab-pane
-                  :label="`通知(${notificationArray.length})`"
-                  name="notification">
-                  <el-list v-if="notificationArray.length > 0">
-                    <el-list-item
-                      v-for="n in notificationArray" :key="n.title">
-                      <el-list-item-meta
-                        :title="n.title" :description="n.description" slot="meta">
-                        <span slot="avatar">
-                          <el-button circle size="small" :icon="n.type" :type="n.importance">
-                          </el-button>
-                        </span>
-                      </el-list-item-meta>
-                    </el-list-item>
-                    <div slot="footer" class="remind-list-footer">
-                      <span @click="doClearRemind('notification')">清空通知</span>
-                    </div>
-                  </el-list>
-                  <div class="remind-no-data" v-else>
-                    <div>
-                      <div>
-                        <i class="el-icon-bell"></i>
-                      </div>
-                      <div>
-                        您已查看所有通知
-                      </div>
-                    </div>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane :label="`消息(${messageArray.length})`" name="message">
-                  <el-list v-if="messageArray.length > 0">
-                    <el-list-item
-                      v-for="(m, index) in messageArray"
-                      :key="index">
-                      <el-list-item-meta
-                        :title="getRemindMessageTitle(m)"
-                        :description="m.message" slot="meta">
-                        <span slot="avatar">
-                          <img :src="m.userImg" class="remind-tabs-message__user-icon"/>
-                        </span>
-                      </el-list-item-meta>
-                    </el-list-item>
-                    <div slot="footer" class="remind-list-footer">
-                      <span @click="doClearRemind('message')">清空消息</span>
-                    </div>
-                  </el-list>
-                  <div class="remind-no-data" v-else>
-                    <div>
-                      <div>
-                        <i class="el-icon-message"></i>
-                      </div>
-                      <div>
-                        您已查看所有消息
-                      </div>
-                    </div>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane :label="`待办(${todoArray.length})`" name="todo">
-                  <el-list v-if="todoArray.length > 0">
-                    <el-list-item
-                      v-for="(t, index) in todoArray"
-                      :key="index">
-                      <el-list-item-meta
-                        :description="t.description" slot="meta">
-                        <div slot="title">
-                          {{ t.title }}
-                          <div style="float:right">
-                            <el-tag size="small" :type="t.status === 'ready' ? 'info' : ''">
-                              {{ t.status === 'ready' ? '未开始' : '进行中' }}
-                            </el-tag>
-                          </div>
-                        </div>
-                      </el-list-item-meta>
-                    </el-list-item>
-                    <div slot="footer" class="remind-list-footer">
-                      <span @click="doClearRemind('todo')">清空待办</span>
-                    </div>
-                  </el-list>
-                  <div class="remind-no-data" v-else>
-                    <div>
-                      <div>
-                        <i class="el-icon-view"></i>
-                      </div>
-                      <div>
-                        您已完成所有待办事项
-                      </div>
-                    </div>
-                  </div>
-                </el-tab-pane>
-              </el-tabs>
+              popper-class="remind-popover">
+              <reminder @un-read-count-change="handleRemindUnReadCountChange"></reminder>
             </el-popover>
-            <el-badge :value="remindCount"
+            <el-badge :value="remindUnReadCount"
               :max="99" class="remind-badge" v-popover:remindPopover>
               <i class="fa fa-bell-o"></i>
             </el-badge>
@@ -169,12 +75,12 @@
         <router-view></router-view>
       </div>
       <div class="system-layout-footer">
-        UME System ©2017 Created by UME Team
+        Setaria UI Pro ©2018 Created by Ray Han
       </div>
     </div>
   </div>
 </template>
-<style>
+<style lang="scss">
   .system-layout {
     display: -webkit-box;
     display: -webkit-flex;
@@ -190,6 +96,10 @@
     -ms-flex: auto;
     flex: auto;
     background: #ececec;
+
+    .el-dropdown-link {
+      cursor: pointer;
+    }
   }
   .system-layout-has-sider {
     -webkit-box-orient: horizontal;
@@ -267,7 +177,6 @@
   .title {
     vertical-align: text-bottom;
     font-size: 18px;
-    text-transform: uppercase;
     display: inline-block;
     color: #bfcbd9;
   }
@@ -291,45 +200,12 @@
   .remind-badge {
     line-height: 0;
   }
+  .remind-badge:hover {
+    cursor: pointer;
+  }
   .remind-popover {
     padding: 0 !important;
     width: 327px;
-  }
-  .remind-popover .el-tabs__header {
-    margin-bottom: 0;
-  }
-  .remind-popover .el-tabs__nav-scroll,
-  .remind-popover .el-list-item {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  .remind-popover .el-list > * {
-    cursor: pointer;
-  }
-  .remind-popover .el-list > .el-list-item:hover {
-    background-color: #e6f7ff;
-  }
-  .remind-popover .el-list .remind-tabs-message__user-icon {
-    height: 30px;
-  }
-  .remind-popover .el-list .remind-list-footer {
-    text-align: center;
-  }
-  .remind-popover .el-list .el-list-item-meta-description {
-    font-size: 13px !important;
-  }
-  .remind-popover .remind-no-data {
-    text-align: center;
-    display: flex;
-    height: 200px;
-    align-items: center;
-  }
-  .remind-popover .remind-no-data i {
-    font-size: 48px;
-    color: rgb(0, 0,0, 0.25);
-  }
-  .remind-popover .remind-no-data > div {
-    flex: 1;
   }
 </style>
 <style lang="scss" scoped>
@@ -339,9 +215,9 @@
 </style>
 
 <script>
-import { config, Message, util } from 'setaria';
-import { Notice } from '@/component';
-import UserResource from '@/model/resource/UserResource';
+import { get, getConfigValue } from '@/model/util';
+import Auth from '@/model/resource/Auth';
+import Reminder from './Reminder.vue';
 
 export default {
   // 组件名称
@@ -389,12 +265,7 @@ export default {
           ],
         },
       ],
-      remindPopoverActiveName: 'notification',
-      remindPopoverLoading: false,
-      remindCount: 8,
-      notificationArray: [],
-      messageArray: [],
-      todoArray: [],
+      remindUnReadCount: 8,
     };
   },
   /**
@@ -407,14 +278,16 @@ export default {
        * @return {String}
        */
     appTitle() {
-      return config.env.APP_TITLE;
+      return getConfigValue('TITLE');
     },
     /**
        * 用户名称
        * @return {String}
        */
     userName() {
-      return util.get(UserResource.getUser(), 'user.userName', '');
+      const firstName = get(Auth.getUserInfo(), 'first_name', '');
+      const lastName = get(Auth.getUserInfo(), 'last_name', '');
+      return `${lastName} ${firstName}`;
     },
     /**
        * 面包屑
@@ -423,7 +296,7 @@ export default {
     breadCrumb() {
       return this.$route.matched.map((item, index) => {
         const ret = item;
-        if (util.get(ret, 'meta.show', null) !== false) {
+        if (get(ret, 'meta.show', null) !== false) {
           if (ret.path === '' && index === 0) {
             ret.path = '/';
           }
@@ -444,7 +317,7 @@ export default {
     $route: {
       immediate: true,
       handler(val) {
-        this.activeMenu = util.get(val, 'path', '');
+        this.activeMenu = get(val, 'path', '');
       },
     },
   },
@@ -454,164 +327,51 @@ export default {
      */
   methods: {
     /**
-       * 用户功能菜单项目点击事件处理
-       */
+      * 用户功能菜单项目点击事件处理
+      */
     doUserCommandSelect(command) {
       if (command === 'logout') {
         this.logout();
       }
     },
     /**
-       * 收起／展开菜单按钮点击事件处理
-       * @event
-       */
+      * 收起／展开菜单按钮点击事件处理
+      * @event
+      */
     doToggleMenuCollapse() {
       this.isCollapse = !this.isCollapse;
     },
     /**
-     * 提醒清空按钮点击事件处理
-     */
-    doClearRemind(type) {
-      let remindTypeLabel = '';
-      let count = this.remindCount;
-      if (type === 'notification') {
-        remindTypeLabel = '通知';
-        count -= this.notificationArray.length;
-        this.notificationArray = [];
-      } else if (type === 'message') {
-        remindTypeLabel = '消息';
-        count -= this.messageArray.length;
-        this.messageArray = [];
-      } else if (type === 'todo') {
-        remindTypeLabel = '待办';
-        count -= this.todoArray.length;
-        this.todoArray = [];
-      }
-      this.remindCount = count < 0 ? 0 : count;
-      Notice.showMessage({
-        type: 'success',
-        message: new Message('MBM005S', [remindTypeLabel]).getMessage(),
-      });
-    },
-    /**
-     * 提醒弹出框显示事件处理
-     */
-    doRemindPopoverShow() {
-      this.remindPopoverLoading = true;
-      setTimeout(() => {
-        this.notificationArray = [
-          {
-            title: '你收到了12份新周报',
-            description: '1周前',
-            type: 'el-icon-message',
-            importance: 'danger',
-          },
-          {
-            title: '这种模板可区分多种通知类型',
-            description: '1周前',
-            type: 'el-icon-circle-plus',
-            importance: 'primary',
-          },
-          {
-            title: '左侧图标用于区分不同类型',
-            description: '1周前',
-            type: 'el-icon-star-off',
-            importance: 'info',
-          },
-        ];
-        this.messageArray = [
-          {
-            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
-            userName: '杨颖',
-            type: 'comment',
-            message: '描述信息描述信息描述信息',
-            date: '1个月前',
-          },
-          {
-            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
-            userName: '吴迪',
-            type: 'reply',
-            message: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
-            date: '1个月前',
-          },
-          {
-            userImg: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
-            userName: '系统管理员',
-            type: 'send',
-            title: '标题',
-            message: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
-            date: '1个月前',
-          },
-        ];
-        this.todoArray = [
-          {
-            title: '任务名称',
-            status: 'ready',
-            description: '任务需要在 2018-05-20 前启动',
-          },
-          {
-            title: '版本发布',
-            status: 'on-going',
-            description: '需要在 2018-05-20 前完成代码变更任务',
-          },
-        ];
-        this.remindPopoverLoading = false;
-      }, 2000);
-    },
-    /**
-       * 注销按钮点击事件处理
-       * @event
-       */
+      * 注销按钮点击事件处理
+      * @event
+      */
     logout() {
       // 调用登出服务
-      UserResource.logout(UserResource.getUser().user.userId).then(() => {
+      Auth.logout(get(Auth.getUserInfo(), 'user.userId')).then(() => {
         this.forwardToLogin();
       }).catch(() => {
         this.forwardToLogin();
       });
     },
     /**
-       * 跳转至登录页面
-       */
+      * 跳转至登录页面
+      */
     forwardToLogin() {
-      this.$router.forwardTo('Login');
+      this.$router.push({ name: 'Login' });
     },
     /**
-     * 根据通知类型取得对应的图标样式
+     * 提醒消息未读数量变更
      */
-    getNotificationAvatarIconClass(val) {
-      const ret = [];
-      // avatar icon
-      switch (val.type) {
-        case 'message':
-          ret.push('el-icon-message');
-          break;
-        case 'bookmark':
-          ret.push('el-icon-star-on');
-          break;
-        default:
-          ret.push('el-icon-info');
-      }
-      return ret;
-    },
-    getRemindMessageTitle(val) {
-      if (val.title) {
-        return val.title;
-      }
-      let actDescription = '';
-      if (val.type === 'reply') {
-        actDescription = ' 回复了你';
-      } else if (val.type === 'comment') {
-        actDescription = ' 评论了你';
-      }
-      return `${val.userName} ${actDescription}`;
+    handleRemindUnReadCountChange(val) {
+      this.remindUnReadCount = val;
     },
   },
   /**
-     * 使用的子组件列表
-     * @type {Object}
-     */
+    * 使用的子组件列表
+    * @type {Object}
+    */
   components: {
+    Reminder,
   },
 };
 </script>

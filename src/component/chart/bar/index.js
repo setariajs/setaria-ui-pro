@@ -1,4 +1,4 @@
-import Bar from './src/bar';
+import Bar from './src/bar.vue';
 
 /* istanbul ignore next */
 Bar.install = (Vue) => {

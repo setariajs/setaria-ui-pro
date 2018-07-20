@@ -1,20 +1,20 @@
-import { config, util } from 'setaria';
 import { Loading } from 'setaria-ui';
+import { isEmpty } from '@/model/util';
 
 let instance = null;
 
 export default class {
   static show() {
-    if (util.isEmpty(instance)) {
+    if (isEmpty(instance)) {
       instance = Loading.service({
         fullscreen: true,
-        text: config.env.LOADING_TEXT,
+        text: process.env.VUE_APP_SERVICE_LOADING_TEXT,
       });
     }
   }
 
   static hide() {
-    if (!util.isEmpty(instance)) {
+    if (!isEmpty(instance)) {
       instance.close();
       instance = null;
     }

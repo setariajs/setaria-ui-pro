@@ -25,7 +25,7 @@
 </style>
 <script>
 import { Message } from 'setaria';
-import { Notice } from '../../component';
+import Notice from '@/component/notice/index';
 
 export default {
   props: {

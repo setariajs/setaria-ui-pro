@@ -1,4 +1,4 @@
-import MiniBar from './src/mini-bar';
+import MiniBar from './src/mini-bar.vue';
 
 /* istanbul ignore next */
 MiniBar.install = (Vue) => {

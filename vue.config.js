@@ -7,9 +7,9 @@ module.exports = {
     port: 7001,
     // 远程服务代理设置
     proxy: {
-      '/ume-ems/rest/s01/': {
+      '/api': {
         // 远程服务地址
-        target: 'http://localhost:8081',
+        target: 'http://47.94.254.158:5000',
       },
     },
   },

@@ -1,13 +1,15 @@
-import Main from '@/page/Main';
-import Login from '@/page/Login';
-import PageNotFound from '@/page/PageNotFound';
-import Analysis from '@/page/dashboard/Analysis';
-import Dashboard from '@/page/dashboard/Dashboard';
-import Form from '@/page/form/Form';
-import BasicForm from '@/page/form/BasicForm';
-import DynamicForm from '@/page/form/DynamicForm';
-import List from '@/page/list/List';
-import DynamicList from '@/page/list/DynamicList';
+import Main from '@/page/Main.vue';
+import Login from '@/page/Login.vue';
+import PageNotFound from '@/page/PageNotFound.vue';
+import Analysis from '@/page/dashboard/Analysis.vue';
+import Dashboard from '@/page/dashboard/Dashboard.vue';
+import Form from '@/page/form/Form.vue';
+import BasicForm from '@/page/form/BasicForm.vue';
+import DynamicForm from '@/page/form/DynamicForm.vue';
+import List from '@/page/list/List.vue';
+import DynamicList from '@/page/list/DynamicList.vue';
+
+import checkLoginStateGuard from '@/model/guard/checkLoginStateGuard';
 
 export default {
   middleware: ['auth', 'title'],
@@ -23,6 +25,7 @@ export default {
       name: 'Main',
       meta: { title: '首页' },
       component: Main,
+      beforeEnter: checkLoginStateGuard(true),
       children: [
         {
           path: 'dashboard',
