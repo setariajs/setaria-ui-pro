@@ -1,15 +1,17 @@
 import Main from '@/page/Main.vue';
 import Login from '@/page/Login.vue';
 import PageNotFound from '@/page/PageNotFound.vue';
-import Analysis from '@/page/dashboard/Analysis.vue';
-import Dashboard from '@/page/dashboard/Dashboard.vue';
-import Form from '@/page/form/Form.vue';
-import BasicForm from '@/page/form/BasicForm.vue';
-import DynamicForm from '@/page/form/DynamicForm.vue';
-import List from '@/page/list/List.vue';
-import DynamicList from '@/page/list/DynamicList.vue';
-
 import checkLoginStateGuard from '@/model/guard/checkLoginStateGuard';
+
+const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashboard/Dashboard');
+const Analysis = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashboard/Analysis');
+
+const Form = () => import(/* webpackChunkName: "form" */ '@/page/form/Form');
+const BasicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/BasicForm');
+const DynamicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/DynamicForm');
+
+const List = () => import(/* webpackChunkName: "list" */ '@/page/list/List');
+const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/DynamicList');
 
 export default {
   middleware: ['auth', 'title'],
