@@ -25,7 +25,6 @@ async function invoke(serviceId, serviceParam = [], config = {}) {
     httpConfig.headers = {};
   }
   // httpConfig.headers.TOKEN = store.getters['common/token'];
-  // httpConfig.headers['RESOURCE-ID'] = store.getters['auth/resourceId'];
   // 默认使用POST
   const method = isEmpty(httpConfig.method) ? 'post' : httpConfig.method;
   return new Promise((resolve, reject) => {

@@ -285,9 +285,7 @@ export default {
        * @return {String}
        */
     userName() {
-      const firstName = get(Auth.getUserInfo(), 'first_name', '');
-      const lastName = get(Auth.getUserInfo(), 'last_name', '');
-      return `${lastName} ${firstName}`;
+      return get(Auth.getUserInfo(), 'name', '');
     },
     /**
        * 面包屑

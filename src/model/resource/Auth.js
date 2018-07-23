@@ -23,12 +23,12 @@ class Auth {
    */
   static async login(username, password) {
     const store = Setaria.getStore();
-    const res = await apiHttp.post('login', {
+    const res = await apiHttp.post('posts', {
       username,
       password,
     });
-    if (res && res.token) {
-      store.commit('common/token', res.token);
+    if (res) {
+      store.commit('common/token', 'Iamtoken');
     }
     return res;
   }
@@ -38,7 +38,7 @@ class Auth {
    * @return {Promise}
    */
   static async logout() {
-    apiHttp.post('logout');
+    apiHttp.post('posts');
     // 即时清空用户信息
     clearSessionInfo();
   }
@@ -49,10 +49,9 @@ class Auth {
    */
   static async refreshUserInfo() {
     const store = Setaria.getStore();
-    const token = store.getters['common/token'];
-    const { user } = await apiHttp.get(`token/${token}`);
+    const res = await apiHttp.get('users/1');
     // 在本地保存用户信息
-    store.commit('common/user', user);
+    store.commit('common/user', res);
   }
 
   /**
