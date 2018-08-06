@@ -4,7 +4,7 @@ import locale from 'setaria-ui/lib/locale/lang/zh-CN';
 import 'font-awesome/css/font-awesome.css';
 import 'setaria-ui/lib/theme-chalk/index.css';
 import { isEmpty } from '@/model/util';
-import '../style/default.css';
+import '../style/default.scss';
 import Chart from './chart';
 import Trend from './trend';
 
