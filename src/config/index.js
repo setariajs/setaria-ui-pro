@@ -6,7 +6,7 @@ export default {
   http: {
     api: {
       timeout: 60000,
-      baseURL: 'https://jsonplaceholder.typicode.com/',
+      baseURL: '/api/',
     },
   },
   message,

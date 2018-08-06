@@ -5,12 +5,16 @@ import Setaria from 'setaria';
 import config from './config/index';
 import UI from './component/index';
 import App from './App.vue';
+import mockConfig from '../mock/index';
+import { delay, init } from '../mock/adapter';
 
 const setaria = new Setaria(config);
 // Setaria初始化
 Vue.use(Setaria);
 // 安装全局组件
 Vue.use(UI);
+// mock
+init(delay(mockConfig, 500));
 
 new Vue({
   setaria,

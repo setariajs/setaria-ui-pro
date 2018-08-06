@@ -39,6 +39,7 @@
 <script>
 import { Message } from 'setaria';
 import Notice from '@/component/notice/index';
+import apiHttp from '@/model/resource/apiHttp';
 
 export default {
   data() {
@@ -102,31 +103,10 @@ export default {
      * 检索结果一览数据取得事件处理
      * @event
      */
-    doGetResult(val, currentPage) {
+    async doGetResult(val, currentPage) {
       this.condition.theFetchStart = (currentPage === 1) ? 0 :
         (currentPage - 1) * this.condition.theFetchSize;
-      return new Promise((resolve) => {
-        let ret = null;
-        if (currentPage === 1) {
-          ret = [
-            {
-              name: '管理员',
-              gender: '男',
-              mobile: '13910000001',
-              birth: '1979-03-08',
-              activeFlag: '有效',
-            },
-            {
-              name: '赵三',
-              gender: '男',
-              mobile: '13910000002',
-              birth: '1982-08-19',
-              activeFlag: '无效',
-            },
-          ];
-        }
-        resolve(ret);
-      });
+      return apiHttp.get('users');
     },
     doCreate() {
       Notice.showMessage(new Message('MBM004I', ['新增']));

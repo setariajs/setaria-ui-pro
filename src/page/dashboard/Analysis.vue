@@ -169,7 +169,7 @@ export default {
     for (let i = 0; i < 7; i += 1) {
       salesRankData.push({
         title: `工专路 ${i} 号店`,
-        total: 323234,
+        total: numeral(323234).format('0,0'),
       });
     }
     return {

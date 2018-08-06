@@ -18,9 +18,9 @@
           router
           :collapse="isCollapse"
           :default-active="activeMenu"
-          background-color="#324157"
+          background-color="#001529"
           text-color="#fff"
-          active-text-color="#ffd04b">
+          active-text-color="#fff">
           <el-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
             <template slot="title">
               <i class="menu-icon fa" :class="subMenu.className" aria-hidden="true"></i>
@@ -112,7 +112,7 @@
     -webkit-transition: all .15s cubic-bezier(.645,.045,.355,1);
     transition: all .15s cubic-bezier(.645,.045,.355,1);
     position: relative;
-    background: #324157;
+    background: #001529;
     min-width: 0;
     height: 100vh;
     position: fixed;
@@ -167,7 +167,7 @@
     height: 64px;
     line-height: 64px;
     text-align: center;
-    background: #324157;
+    background: #001529;
   }
   .system-logo {
     width: 40px;
@@ -187,7 +187,7 @@
     text-align: center;
     color: #bfcbd9;
     font-size: 18px;
-    background: #384558;
+    background: #001529;
   }
   .nav-menu-collapse:hover {
     cursor: pointer;
@@ -210,7 +210,11 @@
 </style>
 <style lang="scss" scoped>
   .system-nav-menu {
-    border-right: 1px solid #324157;
+    border-right: 1px solid #001529;
+
+    .is-active {
+      background-color: #1890ff !important;
+    }
   }
 </style>
 
@@ -305,7 +309,7 @@ export default {
       });
     },
     navMenuWidth() {
-      return this.isCollapse ? '65px' : '220px';
+      return this.isCollapse ? '65px' : '260px';
     },
     navMenuOverflow() {
       return this.isCollapse ? 'unset' : 'auto';
