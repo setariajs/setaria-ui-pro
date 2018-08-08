@@ -27,6 +27,11 @@ export default {
     },
     formatter: Function,
   },
+  data() {
+    return {
+      debounceResize: null,
+    };
+  },
   computed: {
     options() {
       const {

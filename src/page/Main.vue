@@ -118,11 +118,14 @@
     }
 
     .container {
+      background-color: #f0f2f5;
+
       .header {
         height: 60px;
         line-height: 60px;
         padding: 0 12px 0 0;
         box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+        background-color:#fff;
 
         .header-right {
           float: right;
@@ -175,12 +178,16 @@ import Reminder from './Reminder.vue';
 
 const menuList = [
   {
-    name: 'dashboard',
+    name: 'Dashboard',
     className: 'fa-tachometer',
     children: [
       {
         name: '分析页',
         link: '/dashboard/analysis',
+      },
+      {
+        name: '工作台',
+        link: '/dashboard/workplace',
       },
     ],
   },

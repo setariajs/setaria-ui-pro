@@ -6,6 +6,9 @@
   </div>
 </template>
 <script>
+import debounce from 'throttle-debounce/debounce';
+import { addResizeListener, removeResizeListener } from '../../../resize-event';
+
 export default {
   name: 'ElMiniArea',
   props: {
@@ -27,6 +30,11 @@ export default {
       required: true,
     },
     formatter: Function,
+  },
+  data() {
+    return {
+      debounceResize: null,
+    };
   },
   computed: {
     options() {
@@ -90,6 +98,17 @@ export default {
         ],
       };
     },
+  },
+  created() {
+    this.debounceResize = debounce(200, () => this.$refs.chart.resize());
+  },
+  mounted() {
+    addResizeListener(this.$el, this.debounceResize);
+  },
+  beforeDestroy() {
+    if (this.$el) {
+      removeResizeListener(this.$el, this.debounceResize);
+    }
   },
 };
 </script>

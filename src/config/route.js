@@ -5,6 +5,7 @@ import checkLoginStateGuard from '@/model/guard/checkLoginStateGuard';
 
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashboard/Dashboard');
 const Analysis = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashboard/Analysis');
+const Workplace = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashboard/Workplace');
 
 const Form = () => import(/* webpackChunkName: "form" */ '@/page/form/Form');
 const BasicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/BasicForm');
@@ -40,6 +41,12 @@ export default {
               name: 'Analysis',
               meta: { title: '分析页' },
               component: Analysis,
+            },
+            {
+              path: 'workplace',
+              name: 'Workplace',
+              meta: { title: '工作台' },
+              component: Workplace,
             },
           ],
         },

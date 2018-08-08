@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row type="flex" justify="space-between">
-      <el-col :span="6">
+    <el-row class="chart" :gutter="10">
+      <el-col :md="12" :lg="6">
         <el-chart-card :total="miniBarTotal">
           <span slot="title">访问量</span>
           <span slot="action">
@@ -9,24 +9,29 @@
               <i class="el-icon-info"></i>
             </el-tooltip>
           </span>
-          <el-mini-bar :height="30" :data="miniBarData"></el-mini-bar>
+          <el-mini-bar :height="46" :data="miniBarData"></el-mini-bar>
           <div slot="footer">
             日访问量 {{ miniBarFooter }}
           </div>
         </el-chart-card>
       </el-col>
-      <el-col :span="6">
+      <el-col :md="12" :lg="6">
         <el-chart-card :total="miniAreaTotal">
           <span slot="title">搜索用户数量</span>
-          <el-mini-area :height="30" :border-width="2" :data="miniAreaData"></el-mini-area>
+          <span slot="action">
+            <el-tooltip content="指标说明" placement="top" slot="title">
+              <i class="el-icon-info"></i>
+            </el-tooltip>
+          </span>
+          <el-mini-area :height="46" :border-width="2" :data="miniAreaData"></el-mini-area>
           <div slot="footer">
             转化率 {{ miniAreaFooter }}
           </div>
         </el-chart-card>
       </el-col>
-      <el-col :span="6">
-        <el-chart-card :total="textTotal" :content-height="30">
-          <span slot="avatar">
+      <el-col :md="12" :lg="6">
+        <el-chart-card :total="textTotal" :content-height="46" class="trend">
+          <!-- <span slot="avatar">
             <img
               :style="{
                 width: '56px',
@@ -35,18 +40,47 @@
               src="http://bpic.588ku.com/element_origin_min_pic/01/40/32/98573cf75c3bf04.jpg"
               alt="indicator"
             />
-          </span>
+          </span> -->
           <span slot="title">总销售额</span>
-          <span>
-            周同比
+          <span slot="action">
+            <el-tooltip content="指标说明" placement="top" slot="title">
+              <i class="el-icon-info"></i>
+            </el-tooltip>
+          </span>
+          <div class="trend-item">
+            <span>周同比</span>
             <el-trend flag="up">12%</el-trend>
-          </span>
-          <span style="margin-left: 16px;">
-            日环比
+          </div>
+          <div class="trend-item">
+            <span>日环比</span>
             <el-trend flag="down">10%</el-trend>
-          </span>
+          </div>
           <div slot="footer">
             日均销售额 {{ miniAreaFooter }}
+          </div>
+        </el-chart-card>
+      </el-col>
+      <el-col :md="12" :lg="6">
+        <el-chart-card :total="progressTotal" :content-height="46" class="progress">
+          <span slot="title">运营活动效果</span>
+          <span slot="action">
+            <el-tooltip content="指标说明" placement="top" slot="title">
+              <i class="el-icon-info"></i>
+            </el-tooltip>
+          </span>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="13"
+            :percentage="progressComponentValue"></el-progress>
+          <div slot="footer" class="progress-footer">
+            <div class="trend-item">
+              <span>周同比</span>
+              <el-trend flag="up">12%</el-trend>
+            </div>
+            <div class="trend-item">
+              <span>日环比</span>
+              <el-trend flag="down">10%</el-trend>
+            </div>
           </div>
         </el-chart-card>
       </el-col>
@@ -96,6 +130,33 @@
   }
 </style>
 <style lang="scss" scoped>
+  .chart {
+    .trend {
+      .trend-item {
+        display: inline-block;
+
+        &:first-child {
+          margin-right: 12px;
+        }
+      }
+    }
+
+    .progress {
+      .progress-footer {
+        white-space: nowrap;
+        overflow: hidden;
+
+        .trend-item {
+          display: inline-block;
+
+          &:first-child {
+            margin-right: 12px;
+          }
+        }
+      }
+    }
+  }
+
   .analysis_sales {
     margin-top: 16px;
 
@@ -175,12 +236,13 @@ export default {
     return {
       miniAreaTotal: numeral(12321).format('0,0'),
       miniAreaFooter: numeral(0.76).format('0%'),
+      miniAreaData: miniData,
       miniBarTotal: numeral(8846).format('0,0'),
       miniBarFooter: numeral(1234).format('0,0'),
       miniBarData: miniData,
-      miniAreaData: miniData,
       barData,
       textTotal: `¥ ${numeral(129102).format('0,0')}`,
+      progressValue: 0.78,
       salesTabList: [
         {
           label: '销售额',
@@ -194,6 +256,14 @@ export default {
       salesActiveTabName: 'sales',
       salesRankData,
     };
+  },
+  computed: {
+    progressTotal() {
+      return numeral(this.progressValue).format('0%');
+    },
+    progressComponentValue() {
+      return this.progressValue * 100;
+    },
   },
   created() {
   },
