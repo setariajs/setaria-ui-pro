@@ -1,32 +1,41 @@
 <template>
-  <el-card>
-    <el-template-base-search
-      class="search-list"
-      ref="searchDataList"
-      :condition-schema="conditionSchema"
-      :condition="condition"
-      :result-schema="resultSchema"
-      :result-ui-schema="resultUiSchema"
-      :get-result="doGetResult"
-      pagination="full"
-      :page-size="pageSize"
-      pagination-layout="prev, pager, next, jumper"
-      result-column-auto-align>
-      <div slot="tableButton">
-        <el-button size="small" type="primary" plain @click="doCreate">新增</el-button>
-      </div>
-      <!-- 行数据的控制按钮 -->
-      <div slot="tableRowButton" slot-scope="props">
-        <el-button type="text" @click="doUpdate(props.row)">修改</el-button>
-        <span class="button-separator">|</span>
-        <el-button type="text" @click="doDelete(props.row)">删除</el-button>
-      </div>
-      <!-- 可对数据的显示格式进行自定义 -->
-      <template slot="columnActiveFlag" slot-scope="props">
-        <span :class="{ invalid: props.row.activeFlag === '无效' }">{{ props.row.activeFlag }}</span>
-      </template>
-    </el-template-base-search>
-  </el-card>
+  <div>
+    <el-page-header
+      title="动态查询列表"
+      content="通过定义JSON格式的检索条件和检索结果的结构，可以快速构建一个常用的检索页面。">
+    </el-page-header>
+    <el-card style="margin: 24px 24px 0;">
+      <el-template-base-search
+        class="search-list"
+        ref="searchDataList"
+        :condition-schema="conditionSchema"
+        :condition="condition"
+        :result-schema="resultSchema"
+        :result-ui-schema="resultUiSchema"
+        :get-result="doGetResult"
+        pagination="full"
+        :page-size="pageSize"
+        pagination-layout="prev, pager, next, jumper"
+        result-column-auto-align>
+        <div slot="tableButton">
+          <el-button size="small" type="primary" plain @click="doCreate">新增</el-button>
+        </div>
+        <!-- 行数据的控制按钮 -->
+        <div slot="tableRowButton" slot-scope="props">
+          <el-button type="text" @click="doUpdate(props.row)">修改</el-button>
+          <span class="button-separator">|</span>
+          <el-button type="text" @click="doDelete(props.row)">删除</el-button>
+        </div>
+        <!-- 可对数据的显示格式进行自定义 -->
+        <template slot="columnActiveFlag" slot-scope="props">
+          <span
+            :class="{ invalid: props.row.activeFlag === '无效' }">
+            {{ props.row.activeFlag }}
+          </span>
+        </template>
+      </el-template-base-search>
+    </el-card>
+  </div>
 </template>
 <style scoped>
   .button-separator {

@@ -36,7 +36,7 @@
       </el-menu>
     </el-aside>
     <el-container class="container">
-      <el-header class="header">
+      <el-header>
         <div class="action menu-fold" @click="handleMenuFold">
           <i :class="{
             'el-icon-d-arrow-left': !isMenuCollapse,
@@ -168,7 +168,7 @@
   .container {
     background-color: #f0f2f5;
 
-    .header {
+    .el-header {
       height: 60px;
       line-height: 60px;
       padding: 0 12px 0 0;
@@ -205,6 +205,10 @@
         float: right;
         height: 100%;
       }
+    }
+
+    .el-main {
+      padding: 0;
     }
 
     .el-footer {
