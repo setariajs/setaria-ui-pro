@@ -1,19 +1,21 @@
 <template>
   <el-container class="main">
-    <el-aside :width="navMenuWidth">
+    <el-aside :width="asideWidth" class="aside">
       <div class="brand">
-        <template v-if="!isCollapse">
+        <template>
           <router-link :to="{name: 'Analysis'}">
             <img :src="logoUrl"/>
-            <h1>{{ appTitle }}</h1>
+            <h1 v-if="!isMenuCollapse">{{ appTitle }}</h1>
           </router-link>
         </template>
       </div>
       <el-menu
         class="nav-menu"
-        :style="{width: navMenuWidth}"
+        :style="{
+          width: asideWidth
+        }"
         router
-        :collapse="isCollapse"
+        :collapse="isMenuCollapse"
         :default-active="activeMenu"
         background-color="#001529"
         text-color="#fff"
@@ -23,7 +25,11 @@
             <i class="menu-icon fa" :class="subMenu.className" aria-hidden="true"></i>
             <span>{{ subMenu.name }}</span>
           </template>
-          <el-menu-item v-for="menu in subMenu.children" :index="menu.link" :key="menu.link">
+          <el-menu-item
+            class="nav-menu-item"
+            v-for="menu in subMenu.children"
+            :index="menu.link"
+            :key="menu.link">
             <span slot="title">{{ menu.name }}</span>
           </el-menu-item>
         </el-submenu>
@@ -31,6 +37,12 @@
     </el-aside>
     <el-container class="container">
       <el-header class="header">
+        <div class="action menu-fold" @click="handleMenuFold">
+          <i :class="{
+            'el-icon-d-arrow-left': !isMenuCollapse,
+            'el-icon-d-arrow-right': isMenuCollapse,
+          }"></i>
+        </div>
         <div class="header-right">
           <span class="action">
             <el-popover
@@ -75,38 +87,73 @@
     </el-container>
   </el-container>
 </template>
-<style lang="scss" scoped>
-  @import "../style/variables.scss";
+<style lang="scss">
+@import "../style/variables.scss";
 
-  .main {
-    width: 100%;
-    height: 100%;
-
-    .brand {
-      height: 64px;
-      line-height: 64px;
-      background: #001529;
-      font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      padding-left: 24px;
-
-      h1 {
-        font-size: 20px;
-        color: #bfcbd9;
-        display: inline-block;
-        vertical-align: middle;
-        margin-bottom: 0;
-      }
-
-      img {
-        display: inline-block;
-        height: 32px;
-        margin-right: 16px;
-        vertical-align: middle;
+.remind-popover {
+  padding: 0 !important;
+  width: 327px;
+}
+.main {
+  .nav-menu {
+    &.el-menu--collapse {
+      .el-submenu__title {
+        text-align: center;
+        font-size: 18px;
       }
     }
+  }
+}
+.nav-menu-item.is-active {
+  background-color: $--color-primary !important;
+}
+</style>
+
+<style lang="scss" scoped>
+@import "../style/variables.scss";
+
+.main {
+  width: 100%;
+  height: 100%;
+
+  .brand {
+    height: 64px;
+    line-height: 64px;
+    background: #001529;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding-left: 24px;
+
+    h1 {
+      font-size: 20px;
+      color: #bfcbd9;
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }
+
+    img {
+      display: inline-block;
+      height: 32px;
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+  }
+
+  .aside {
+    transition: width .2s;
 
     .nav-menu {
       height: 100%;
+
+      &.el-menu--collapse {
+        .el-submenu.is-active {
+          .el-submenu__title {
+            i {
+              color: #fff;
+            }
+          }
+        }
+      }
 
       .el-menu-item.is-active {
         background-color: $--color-primary !important;
@@ -116,62 +163,65 @@
         margin-right: 10px;
       }
     }
+  }
 
-    .container {
-      background-color: #f0f2f5;
+  .container {
+    background-color: #f0f2f5;
 
-      .header {
-        height: 60px;
-        line-height: 60px;
-        padding: 0 12px 0 0;
-        box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-        background-color:#fff;
+    .header {
+      height: 60px;
+      line-height: 60px;
+      padding: 0 12px 0 0;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+      background-color:#fff;
 
-        .header-right {
-          float: right;
-          height: 100%;
+      .action {
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        padding: 0 12px;
 
-          .action {
-            display: inline-block;
-            height: 100%;
-            cursor: pointer;
-            padding: 0 12px;
+        &:hover {
+          background-color: $--color-primary-light-8;
+        }
 
-            &:hover {
-              background-color: $--color-primary-light-8;
-            }
+        .remind {
+          display: inline;
+        }
 
-            .remind {
-              display: inline;
-            }
-
-            .remind-popover {
-              padding: 0 !important;
-              width: 327px;
-            }
-
-            .el-dropdown-link {
-              .fa {
-                font-size: 18px;
-              }
-            }
+        .el-dropdown-link {
+          .fa {
+            font-size: 18px;
           }
         }
       }
 
-      .el-footer {
-        line-height: 48px;
-        text-align: center;
+      .menu-fold {
+        display: inline-block;
+        padding: 0 20px;
+      }
 
-        .copyright {
-          color: rgba(0, 0, 0, 0.45);
-        }
+      .header-right {
+        float: right;
+        height: 100%;
+      }
+    }
+
+    .el-footer {
+      line-height: 48px;
+      text-align: center;
+
+      .copyright {
+        color: rgba(0, 0, 0, 0.45);
       }
     }
   }
+}
 </style>
 
 <script>
+import debounce from 'throttle-debounce/debounce';
+import { addResizeListener, removeResizeListener } from '@/component/resize-event';
 import Auth from '@/model/resource/Auth';
 import { get, getConfigValue, getPublicResourceUrl } from '@/model/util';
 import Reminder from './Reminder.vue';
@@ -222,21 +272,18 @@ export default {
   activeMenu: '',
   data() {
     return {
-      isCollapse: false,
       logoUrl: getPublicResourceUrl('logo.png'),
       menuList,
       remindUnReadCount: 8,
+      isMenuCollapse: false,
     };
   },
   computed: {
+    asideWidth() {
+      return this.isMenuCollapse ? '80px' : '260px';
+    },
     appTitle() {
       return getConfigValue('TITLE');
-    },
-    /**
-     * 菜单宽度
-     */
-    navMenuWidth() {
-      return this.isCollapse ? '65px' : '260px';
     },
     /**
      * 用户名称
@@ -254,6 +301,23 @@ export default {
       },
     },
   },
+  created() {
+    this.debounceResize = debounce(200, () => {
+      if (this.$el.clientWidth <= 992) {
+        this.isMenuCollapse = true;
+      } else {
+        this.isMenuCollapse = false;
+      }
+    });
+  },
+  mounted() {
+    addResizeListener(this.$el, this.debounceResize);
+  },
+  beforeDestroy() {
+    if (this.$el) {
+      removeResizeListener(this.$el, this.debounceResize);
+    }
+  },
   methods: {
     /**
      * 提醒消息未读数量变更
@@ -268,6 +332,18 @@ export default {
       if (command === 'logout') {
         this.logout();
       }
+    },
+    /**
+     * 菜单展开/收起事件处理
+     * @event
+     */
+    handleMenuFold() {
+      const currentMenuList = this.menuList;
+      this.menuList = [];
+      this.isMenuCollapse = !this.isMenuCollapse;
+      this.$nextTick(() => {
+        this.menuList = currentMenuList;
+      });
     },
     /**
       * 注销按钮点击事件处理
