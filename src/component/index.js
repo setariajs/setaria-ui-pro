@@ -7,11 +7,13 @@ import { isEmpty } from '@/model/util';
 import '../style/default.scss';
 import Chart from './chart';
 import PageHeader from './page-header';
+import GridContent from './grid-content';
 import Trend from './trend';
 
 const customComponents = {
   ...Chart,
   PageHeader,
+  GridContent,
   Trend,
 };
 

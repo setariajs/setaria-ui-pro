@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <el-grid-content>
     <el-row class="chart" :gutter="10">
       <el-col :md="12" :lg="6">
         <el-chart-card :total="miniBarTotal">
@@ -122,7 +122,7 @@
         </el-col>
       </el-row>
     </el-card>
-  </div>
+  </el-grid-content>
 </template>
 <style lang="scss">
   .analysis_sales .el-card__header.is-tab {

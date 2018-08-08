@@ -1,22 +1,30 @@
 <template>
-  <el-card>
-    <el-row type="flex" justify="center">
-      <el-col :span="20">
-        <el-dynamic-form
-          :model="formData"
-          :schema="schema"
-          :ui-schema="uiSchema"
-          label-width="100px"
-          :columns="columns"
-          @submit="doSubmit">
-          <div slot="button" class="form-button-container">
-            <el-button class="form-button" type="primary" native-type="submit">保存</el-button>
-            <el-button class="form-button" @click="doCancel">返回</el-button>
-          </div>
-        </el-dynamic-form>
-      </el-col>
-    </el-row>
-  </el-card>
+  <div>
+    <el-page-header
+      title="动态表单"
+      content="通过定义JSON-Schema格式的表单结构，可以快速构建一个常用的表单页面。">
+    </el-page-header>
+    <el-grid-content>
+      <el-card>
+        <el-row type="flex" justify="center">
+          <el-col :span="20">
+            <el-dynamic-form
+              :model="formData"
+              :schema="schema"
+              :ui-schema="uiSchema"
+              label-width="100px"
+              :columns="columns"
+              @submit="doSubmit">
+              <div slot="button" class="form-button-container">
+                <el-button class="form-button" type="primary" native-type="submit">保存</el-button>
+                <el-button class="form-button" @click="doCancel">返回</el-button>
+              </div>
+            </el-dynamic-form>
+          </el-col>
+        </el-row>
+      </el-card>
+    </el-grid-content>
+  </div>
 </template>
 <style scoped>
   .form-button-container {
