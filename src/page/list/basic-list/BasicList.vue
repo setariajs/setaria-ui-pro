@@ -64,13 +64,13 @@
           <div slot="actions">
             <el-button type="text" @click="handleModify(task)">编辑</el-button>
             <el-divider type="vertical"/>
-            <el-dropdown>
+            <el-dropdown @command="handleRowMultiAction($event, task.id)">
               <span class="dropdown-link">
                 <span>更多</span><i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>编辑</el-dropdown-item>
-                <el-dropdown-item>删除</el-dropdown-item>
+                <el-dropdown-item command="modify">编辑</el-dropdown-item>
+                <el-dropdown-item command="remove">删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -250,6 +250,8 @@
 </style>
 
 <script>
+import { Message } from 'setaria';
+import Notice from '@/component/notice/index';
 import { fetch as fetchTaskList } from '@/model/resource/Task';
 import { cloneDeep, isNumber } from '@/model/util';
 import Form from './Form.vue';
@@ -311,6 +313,16 @@ export default {
       this.toggleFormVisible(true);
     },
     /**
+     * 更多菜单项内编辑按钮点击事件处理
+     * @event
+     */
+    handleRowMultiAction(command, selectedTaskId) {
+      if (command === 'modify') {
+        const task = this.taskList.find(item => item.id === selectedTaskId);
+        this.handleModify(task);
+      }
+    },
+    /**
      * 对话框取消按钮点击事件处理
      * @event
      */
@@ -341,6 +353,8 @@ export default {
             this.taskList[index] = this.selectedTask;
           }
         }
+        Notice.showMessage(new Message('MBM001S', ['',
+          !isNumber(this.selectedTask.id) ? '添加' : '编辑']));
         this.selectedTask = {};
       }
       this.handleCloseForm();

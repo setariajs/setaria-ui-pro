@@ -128,7 +128,7 @@ export default {
     doDelete({ name }) {
       Notice.showMessageBox(new Message('MBM002I', [`删除${name}`]))
         .then(() => {
-          Notice.showMessage(new Message('MBM001I', [name, '删除']));
+          Notice.showMessage(new Message('MBM001S', [name, '删除']));
         });
     },
   },

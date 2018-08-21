@@ -106,7 +106,7 @@ export default {
     doFetch() {
     },
     doSubmit() {
-      Notice.showMessage(new Message('MBM001I', ['用户', '新增']));
+      Notice.showMessage(new Message('MBM001S', ['用户', '新增']));
       this.$router.forwardTo('EntitySearch');
     },
     doCancel() {
