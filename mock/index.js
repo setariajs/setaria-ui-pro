@@ -1,30 +1,37 @@
+import mockjs from 'mockjs';
+
+const users = mockjs.mock({
+  'list|10': [
+    {
+      name: '@cname',
+      'gender|1': ['男', '女'],
+      mobile: '13@natural(100000000)',
+      birth: '@date',
+      'activeFlag|1': ['有效', '无效'],
+    },
+  ],
+}).list;
+console.log(users);
+
 export default {
   'GET /api/user': {
     name: 'Poly',
   },
-  'GET /api/users': [
-    {
-      name: '管理员',
-      gender: '男',
-      mobile: '13910000001',
-      birth: '1979-03-08',
-      activeFlag: '有效',
-    },
-    {
-      name: '赵三',
-      gender: '男',
-      mobile: '13910000002',
-      birth: '1982-08-19',
-      activeFlag: '无效',
-    },
-    {
-      name: '李四',
-      gender: '男',
-      mobile: '13910000003',
-      birth: '1985-08-19',
-      activeFlag: '无效',
-    },
-  ],
+  'GET /api/tasks': mockjs.mock({
+    'list|1-5': [
+      {
+        'id|1-100': 1,
+        avatar: '@image("48x48", "@color")',
+        'owner|1': users,
+        title: '@ctitle',
+        description: '@csentence',
+        startDateTime: '@datetime',
+        'percent|0.1-2': 1,
+        'status|0-1': 0,
+      },
+    ],
+  }).list,
+  'GET /api/users': users,
   'POST /api/login': (config) => {
     const { data } = config;
     const { username, password } = JSON.parse(data);

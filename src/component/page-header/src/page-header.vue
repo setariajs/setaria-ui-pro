@@ -118,9 +118,6 @@
           min-width: 266px;
         }
 
-        .content {
-        }
-
         .extra-content {
           margin-left: 88px;
           min-width: 242px;

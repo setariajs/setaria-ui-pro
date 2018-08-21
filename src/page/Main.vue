@@ -22,7 +22,7 @@
         active-text-color="#fff">
         <el-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
           <template slot="title">
-            <i class="menu-icon fa" :class="subMenu.className" aria-hidden="true"></i>
+            <i class="menu-icon fa" :class="subMenu.icon" aria-hidden="true"></i>
             <span>{{ subMenu.name }}</span>
           </template>
           <el-menu-item
@@ -226,50 +226,25 @@
 <script>
 import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from '@/component/resize-event';
+import route from '@/config/route';
 import Auth from '@/model/resource/Auth';
 import { get, getConfigValue, getPublicResourceUrl } from '@/model/util';
 import Reminder from './Reminder.vue';
 
-const menuList = [
-  {
-    name: 'Dashboard',
-    className: 'fa-tachometer',
-    children: [
-      {
-        name: '分析页',
-        link: '/dashboard/analysis',
-      },
-      {
-        name: '工作台',
-        link: '/dashboard/workplace',
-      },
-    ],
-  },
-  {
-    name: '列表页',
-    className: 'fa-table',
-    children: [
-      {
-        name: '动态查询列表',
-        link: '/list/dynamic-list',
-      },
-    ],
-  },
-  {
-    name: '表单页',
-    className: 'fa-pencil-square-o',
-    children: [
-      {
-        name: '基础表单',
-        link: '/form/basic-form',
-      },
-      {
-        name: '动态表单',
-        link: '/form/dynamic-form',
-      },
-    ],
-  },
-];
+function convertRouteToMenuItem({ children, meta, path }, parentPath) {
+  const link = parentPath.indexOf('/') !== parentPath.length - 1
+    ? `${parentPath}/${path}` : `${parentPath}${path}`;
+  const retChildren = [];
+  if (children && children.length > 0) {
+    children.forEach(item => retChildren.push(convertRouteToMenuItem(item, link)));
+  }
+  return {
+    name: meta.title,
+    link,
+    icon: meta.icon || '',
+    children: retChildren,
+  };
+}
 
 export default {
   name: 'Main',
@@ -277,7 +252,6 @@ export default {
   data() {
     return {
       logoUrl: getPublicResourceUrl('logo.png'),
-      menuList,
       remindUnReadCount: 8,
       isMenuCollapse: false,
     };
@@ -288,6 +262,11 @@ export default {
     },
     appTitle() {
       return getConfigValue('TITLE');
+    },
+    menuList() {
+      const mainRoute = route.routes.find(item => item.name === 'Main');
+      const ret = mainRoute.children.map(item => convertRouteToMenuItem(item, mainRoute.path));
+      return ret;
     },
     /**
      * 用户名称
@@ -342,12 +321,7 @@ export default {
      * @event
      */
     handleMenuFold() {
-      const currentMenuList = this.menuList;
-      this.menuList = [];
       this.isMenuCollapse = !this.isMenuCollapse;
-      this.$nextTick(() => {
-        this.menuList = currentMenuList;
-      });
     },
     /**
       * 注销按钮点击事件处理
