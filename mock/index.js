@@ -11,7 +11,6 @@ const users = mockjs.mock({
     },
   ],
 }).list;
-console.log(users);
 
 export default {
   'GET /api/user': {

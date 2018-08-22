@@ -94,6 +94,17 @@
         <el-button type="primary" @click="handleUpdateForm">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      :visible.sync="resultVisible"
+      width="640px">
+      <result
+        title="操作成功"
+        description="一系列的信息描述，很短同样也可以带标点。">
+        <div slot="actions">
+          <el-button type="primary" size="small" @click="resultVisible = false">知道了</el-button>
+        </div>
+      </result>
+    </el-dialog>
   </el-grid-content>
 </template>
 <style lang="scss">
@@ -264,6 +275,7 @@ export default {
       taskList: [],
       selectedTask: null,
       formVisible: false,
+      resultVisible: false,
     };
   },
   components: {
@@ -346,15 +358,15 @@ export default {
           insertTask.percent = 0;
           insertTask.status = 1;
           this.taskList.push(insertTask);
+          Notice.showMessage(new Message('MBM001S', ['', '添加']));
         // 更新的场合
         } else {
           const index = this.taskList.findIndex(item => item.id === this.selectedTask.id);
           if (index !== -1) {
             this.taskList[index] = this.selectedTask;
           }
+          this.resultVisible = true;
         }
-        Notice.showMessage(new Message('MBM001S', ['',
-          !isNumber(this.selectedTask.id) ? '添加' : '编辑']));
         this.selectedTask = {};
       }
       this.handleCloseForm();

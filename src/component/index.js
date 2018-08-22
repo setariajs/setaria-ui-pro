@@ -8,12 +8,14 @@ import '../style/default.scss';
 import Chart from './chart';
 import PageHeader from './page-header';
 import GridContent from './grid-content';
+import Result from './result';
 import Trend from './trend';
 
 const customComponents = {
   ...Chart,
   PageHeader,
   GridContent,
+  Result,
   Trend,
 };
 

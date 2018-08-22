@@ -6597,8 +6597,8 @@ set-value@^2.0.0:
     split-string "^3.0.1"
 
 setaria-ui@^1.4.0:
-  version "1.4.12"
-  resolved "https://registry.npmjs.org/setaria-ui/-/setaria-ui-1.4.12.tgz#e13a32414a827020dfb6a0c0b5766b353c25f01f"
+  version "1.4.14"
+  resolved "https://registry.npmjs.org/setaria-ui/-/setaria-ui-1.4.14.tgz#204c943e23745226c8f5affa2a9fbdb689164c50"
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"
