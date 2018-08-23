@@ -305,8 +305,7 @@ export default {
   },
   methods: {
     async fetchList() {
-      const taskList = await fetchTaskList();
-      this.taskList = taskList;
+      this.taskList = await fetchTaskList();
     },
     /**
      * 添加按钮点击事件处理
