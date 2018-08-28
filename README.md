@@ -28,6 +28,7 @@ npm config get registry
   [安装包下载地址](https://yarnpkg.com/lang/zh-hans/docs/install/)
 
 ## 安装步骤
+
 ``` bash
 # 下载工程到本地
 git clone https://github.com/bluejfox/setaria-ui-pro.git
@@ -38,6 +39,7 @@ yarn
 ```
 
 ## 本地开发
+
 ``` bash
 # 在vue.config.js中修改proxy
 例:
@@ -53,21 +55,25 @@ yarn serve
 ```
 
 ## 部署生产
+
 通过命令行工具进入setaria-ui-pro目录，执行 `yarn build`。
 
 ``` bash
-1. 执行 `yarn build` 进行打包
-2. 取得构建后的文件
-  构建好的文件生成在 `dist` 目录中
+# 执行打包操作
+yarn build
+# 构建后的文件生成在 `dist` 目录
 ```
 
 ## 开发手册
+
 ToDo
 
 ## 浏览器支持
+
 支持各种主流浏览器(Chrome, Firefox, Safari)和Internet Explorer 9+.
 
 ## 主要依赖包列表
+
 * [vue](https://vuejs.org/) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 * [setaria](https://github.com/bluejfox/setaria) - An Front-End Single Page Application Framework base on Vue.
 * [setaria-ui](https://github.com/bluejfox/setaria-ui) - A Vue.js 2.0 UI Toolkit for Web.
@@ -75,7 +81,9 @@ ToDo
 * [echarts](http://echarts.baidu.com/) -a powerful, interactive charting and visualization library for browser.
 
 ## 开发前需要掌握的知识
+
 * [ES6](http://es6.ruanyifeng.com/)
 
 ## License
+
 MIT
