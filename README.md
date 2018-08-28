@@ -42,7 +42,7 @@ yarn
 # 在vue.config.js中修改proxy
 例:
 proxy: {
-  '/ume-ems/rest/s01/': {
+  '/api/': {
     // 远程服务地址
     target: 'http://localhost:8081',
   },
@@ -53,24 +53,26 @@ yarn serve
 ```
 
 ## 部署生产
-通过命令行工具进入ume-emc目录，执行mvn clean package。
+通过命令行工具进入setaria-ui-pro目录，执行 `yarn build`。
 
 ``` bash
-1. 执行 `yarn run build` 进行打包
+1. 执行 `yarn build` 进行打包
 2. 取得构建后的文件
-  构建好的文件生成在 ./target/dist目录中
+  构建好的文件生成在 `dist` 目录中
 ```
 
 ## 开发手册
-[开发手册](https://github.com/ume-team/ume-emc/blob/master/doc/GUIDE.md)
+ToDo
 
 ## 浏览器支持
 支持各种主流浏览器(Chrome, Firefox, Safari)和Internet Explorer 9+.
 
-## 依赖包列表
-* [vue](https://github.com/vuejs/vue)
-* [axios](https://github.com/mzabriskie/axios)
-* [element-ui](https://github.com/ElemeFE/element) - A Vue.js 2.0 UI Toolkit for Web.
+## 主要依赖包列表
+* [vue](https://vuejs.org/) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
+* [setaria](https://github.com/bluejfox/setaria) - An Front-End Single Page Application Framework base on Vue.
+* [setaria-ui](https://github.com/bluejfox/setaria-ui) - A Vue.js 2.0 UI Toolkit for Web.
+* [axios](https://github.com/mzabriskie/axios) - Promise based HTTP client for the browser and node.js.
+* [echarts](http://echarts.baidu.com/) -a powerful, interactive charting and visualization library for browser.
 
 ## 开发前需要掌握的知识
 * [ES6](http://es6.ruanyifeng.com/)
