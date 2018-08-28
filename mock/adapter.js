@@ -67,10 +67,20 @@ function writeLogToBrowserConsole(url, reqData = 'null', resCode, resData) {
 function logJSONParseError() {
 }
 
-function outputMockProcessData({ baseURL = '/', url, data }, responseData) {
+function outputMockProcessData({
+  baseURL = '/',
+  data,
+  method,
+  params,
+  url,
+}, responseData) {
   let requestData = data;
   try {
-    requestData = JSON.parse(data);
+    if (method.toLowerCase() === 'get') {
+      requestData = params;
+    } else {
+      requestData = JSON.parse(data);
+    }
   } catch (e) {
     logJSONParseError(e);
   }
@@ -86,17 +96,18 @@ function outputMockProcessData({ baseURL = '/', url, data }, responseData) {
 
 function getMockAdapterFunction(key) {
   let execFunctioName = '';
-  switch (key) {
-    case key.indexOf('GET') === 0:
+  const method = key.split(' ')[0].toLowerCase();
+  switch (method) {
+    case 'get':
       execFunctioName = 'onGet';
       break;
-    case key.indexOf('POST') === 0:
+    case 'post':
       execFunctioName = 'onPost';
       break;
-    case key.indexOf('PUT') === 0:
+    case 'put':
       execFunctioName = 'onPut';
       break;
-    case key.indexOf('DELETE') === 0:
+    case 'delete':
       execFunctioName = 'onDelete';
       break;
     default:

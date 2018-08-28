@@ -17,7 +17,7 @@ function throwError(error) {
   * @param  {Object}  config       服务配置信息（isShowError[Boolean] 是否显示异常）
   * @return {Promise} Promise
   */
-async function invoke(serviceId, serviceParam = [], config = {}) {
+async function invoke(serviceId, serviceParam, config = {}) {
   const httpConfig = config;
   // const store = Setaria.getStore();
   // Headers
@@ -28,8 +28,17 @@ async function invoke(serviceId, serviceParam = [], config = {}) {
   // 默认使用POST
   const method = isEmpty(httpConfig.method) ? 'post' : httpConfig.method;
   return new Promise((resolve, reject) => {
+    let httpPromise = null;
+    // 发起GET请求的场合
+    if (httpConfig.method.toLowerCase() === 'get') {
+      httpConfig.params = serviceParam;
+      httpPromise = Setaria.getHttp().api[method](serviceId, httpConfig);
+    // 发起其他请求的场合
+    } else {
+      httpPromise = Setaria.getHttp().api[method](serviceId, serviceParam, httpConfig);
+    }
     // 调用指定服务
-    Setaria.getHttp().api[method](serviceId, serviceParam, httpConfig).then((res) => {
+    httpPromise.then((res) => {
       const resData = res.data;
       resolve(resData);
     }).catch((error) => {
@@ -62,7 +71,7 @@ async function all(promiseArr) {
   * @param {*} serviceParam
   * @param {*} config
   */
-async function get(serviceId, serviceParam = [], config = {}) {
+async function get(serviceId, serviceParam, config = {}) {
   const c = config;
   c.method = 'get';
   return invoke(serviceId, serviceParam, c);
@@ -74,7 +83,7 @@ async function get(serviceId, serviceParam = [], config = {}) {
   * @param {*} serviceParam
   * @param {*} config
   */
-async function post(serviceId, serviceParam = [], config = {}) {
+async function post(serviceId, serviceParam, config = {}) {
   const c = config;
   c.method = 'post';
   return invoke(serviceId, serviceParam, c);
@@ -86,7 +95,7 @@ async function post(serviceId, serviceParam = [], config = {}) {
   * @param {*} serviceParam
   * @param {*} config
   */
-async function put(serviceId, serviceParam = [], config = {}) {
+async function put(serviceId, serviceParam, config = {}) {
   const c = config;
   c.method = 'put';
   return invoke(serviceId, serviceParam, c);
@@ -98,7 +107,7 @@ async function put(serviceId, serviceParam = [], config = {}) {
   * @param {*} serviceParam
   * @param {*} config
   */
-async function execDelete(serviceId, serviceParam = [], config = {}) {
+async function execDelete(serviceId, serviceParam, config = {}) {
   const c = config;
   c.method = 'delete';
   return invoke(serviceId, serviceParam, c);

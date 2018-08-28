@@ -14,6 +14,7 @@ const DynamicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/Dyn
 const List = () => import(/* webpackChunkName: "list" */ '@/page/list/List');
 const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/DynamicList');
 const BasicList = () => import(/* webpackChunkName: "list" */ '@/page/list/basic-list/BasicList');
+const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table-list/TableList');
 
 export default {
   middleware: ['auth', 'title'],
@@ -57,6 +58,12 @@ export default {
           meta: { title: '列表页', icon: 'fa-table', show: false },
           component: List,
           children: [
+            {
+              path: 'table-list',
+              name: 'TableList',
+              meta: { title: '查询表格' },
+              component: TableList,
+            },
             {
               path: 'basic-list',
               name: 'BasicList',

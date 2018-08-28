@@ -1,4 +1,5 @@
 import mockjs from 'mockjs';
+import rule from './rule';
 
 const users = mockjs.mock({
   'list|10': [
@@ -44,4 +45,5 @@ export default {
     }];
   },
   'POST /api/logout': () => [200, {}],
+  ...rule,
 };
