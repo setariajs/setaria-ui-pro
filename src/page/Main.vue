@@ -18,7 +18,7 @@
         :collapse="isMenuCollapse"
         :default-active="activeMenu"
         background-color="#001529"
-        text-color="#fff"
+        text-color="rgba(255, 255, 255, 0.65)"
         active-text-color="#fff">
         <el-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
           <template slot="title">
@@ -145,10 +145,10 @@
     .nav-menu {
       height: 100%;
 
-      &.el-menu--collapse {
+      &.el-menu {
         .el-submenu.is-active {
           .el-submenu__title {
-            i {
+            i, span {
               color: #fff;
             }
           }
