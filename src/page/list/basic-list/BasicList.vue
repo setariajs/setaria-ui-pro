@@ -97,13 +97,13 @@
     <el-dialog
       :visible.sync="resultVisible"
       width="640px">
-      <result
+      <el-result
         title="操作成功"
         description="一系列的信息描述，很短同样也可以带标点。">
         <div slot="actions">
           <el-button type="primary" size="small" @click="resultVisible = false">知道了</el-button>
         </div>
-      </result>
+      </el-result>
     </el-dialog>
   </el-grid-content>
 </template>

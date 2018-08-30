@@ -16,6 +16,10 @@ const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/Dyn
 const BasicList = () => import(/* webpackChunkName: "list" */ '@/page/list/basic-list/BasicList');
 const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table-list/TableList');
 
+const Result = () => import(/* webpackChunkName: "result" */ '@/page/result/Result');
+const Success = () => import(/* webpackChunkName: "result" */ '@/page/result/Success');
+const Error = () => import(/* webpackChunkName: "result" */ '@/page/result/Error');
+
 export default {
   middleware: ['auth', 'title'],
   routes: [
@@ -53,6 +57,26 @@ export default {
           ],
         },
         {
+          path: 'form',
+          name: 'Form',
+          meta: { title: '表单页', icon: 'fa-pencil-square-o', show: false },
+          component: Form,
+          children: [
+            {
+              path: 'basic-form',
+              name: 'BasicForm',
+              meta: { title: '基础表单' },
+              component: BasicForm,
+            },
+            {
+              path: 'dynamic-form',
+              name: 'DynamicForm',
+              meta: { title: '动态表单' },
+              component: DynamicForm,
+            },
+          ],
+        },
+        {
           path: 'list',
           name: 'List',
           meta: { title: '列表页', icon: 'fa-table', show: false },
@@ -79,22 +103,22 @@ export default {
           ],
         },
         {
-          path: 'form',
-          name: 'Form',
-          meta: { title: '表单页', icon: 'fa-pencil-square-o', show: false },
-          component: Form,
+          path: 'result',
+          name: 'Result',
+          meta: { title: '结果页', icon: 'fa-check-circle-o', show: false },
+          component: Result,
           children: [
             {
-              path: 'basic-form',
-              name: 'BasicForm',
-              meta: { title: '基础表单' },
-              component: BasicForm,
+              path: 'success',
+              name: 'Success',
+              meta: { title: '成功页' },
+              component: Success,
             },
             {
-              path: 'dynamic-form',
-              name: 'DynamicForm',
-              meta: { title: '动态表单' },
-              component: DynamicForm,
+              path: 'error',
+              name: 'Error',
+              meta: { title: '失败页' },
+              component: Error,
             },
           ],
         },

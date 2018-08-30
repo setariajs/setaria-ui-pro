@@ -1,5 +1,5 @@
 <template>
-  <div class="result">
+  <div class="el-result">
     <div class="icon">
       <i :class="{
         'el-icon-success': type === 'success',
@@ -27,7 +27,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.result {
+.el-result {
   text-align: center;
   margin: 72px 0;
 
@@ -71,7 +71,7 @@
 </style>
 <script>
 export default {
-  name: 'Result',
+  name: 'ElResult',
   props: {
     title: String,
     description: String,
