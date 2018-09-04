@@ -37,8 +37,12 @@
         </el-form-item>
       </el-form>
       <div slot="actions">
-        <el-button type="primary" size="small" @click="handleFinish">再转一笔</el-button>
-        <el-button size="small">查看账单</el-button>
+        <el-button
+          class="button"
+          type="primary"
+          size="small"
+          @click="handleFinish">再转一笔</el-button>
+        <el-button class="button" size="small">查看账单</el-button>
       </div>
     </el-result>
   </div>
@@ -81,5 +85,15 @@ export default {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
+
+  .el-form {
+    .el-form-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .button {
+    font-size: 14px;
+  }
 }
 </style>
