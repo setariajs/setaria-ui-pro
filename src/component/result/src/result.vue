@@ -29,7 +29,6 @@
 <style lang="scss" scoped>
 .el-result {
   text-align: center;
-  margin: 72px 0;
 
   .icon {
     margin-bottom: 24px;
@@ -66,6 +65,10 @@
     padding: 24px 40px;
     border-radius: 2px;
     text-align: left;
+  }
+
+  .actions {
+    margin-top: 32px;
   }
 }
 </style>

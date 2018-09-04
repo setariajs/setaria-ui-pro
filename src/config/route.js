@@ -10,6 +10,10 @@ const Workplace = () => import(/* webpackChunkName: "dashboard" */ '@/page/dashb
 const Form = () => import(/* webpackChunkName: "form" */ '@/page/form/Form');
 const BasicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/BasicForm');
 const DynamicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/DynamicForm');
+const StepForm = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Index');
+const Step1 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step1');
+const Step2 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step2');
+const Step3 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step3');
 
 const List = () => import(/* webpackChunkName: "list" */ '@/page/list/List');
 const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/DynamicList');
@@ -73,6 +77,33 @@ export default {
               name: 'DynamicForm',
               meta: { title: '动态表单' },
               component: DynamicForm,
+            },
+            {
+              path: 'step-form',
+              name: 'StepForm',
+              meta: { title: '分步表单' },
+              component: StepForm,
+              redirect: { name: 'StepFormInfo' },
+              children: [
+                {
+                  path: 'info',
+                  name: 'StepFormInfo',
+                  meta: { title: '分步表单（填写转账信息）' },
+                  component: Step1,
+                },
+                {
+                  path: 'confirm',
+                  name: 'StepFormConfirm',
+                  meta: { title: '分步表单（确认转账信息）' },
+                  component: Step2,
+                },
+                {
+                  path: 'result',
+                  name: 'StepFormResult',
+                  meta: { title: '分步表单（完成）' },
+                  component: Step3,
+                },
+              ],
             },
           ],
         },
