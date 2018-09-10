@@ -25,7 +25,6 @@ const Success = () => import(/* webpackChunkName: "result" */ '@/page/result/Suc
 const Error = () => import(/* webpackChunkName: "result" */ '@/page/result/Error');
 
 export default {
-  middleware: ['auth', 'title'],
   routes: [
     {
       path: '/login',
