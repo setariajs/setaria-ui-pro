@@ -53,7 +53,7 @@
         label=""
         :label-width="{}"
         :wrapper-width="{ span: 18, offset: 6 }">
-        <el-button type="primary" native-type="submit">下一步</el-button>
+        <el-button type="primary" native-type="submit" :loading="submitting">下一步</el-button>
       </el-form-item>
     </el-form>
     <el-divider/>
@@ -114,10 +114,15 @@ export default {
       },
     };
   },
+  computed: {
+    submitting() {
+      return this.$store.state.loading.actions['stepForm/submitStepForm'];
+    },
+  },
   methods: {
-    handleNext() {
+    async handleNext() {
       this.form.amount = parseFloat(this.form.amount);
-      this.$store.commit('stepForm/updateStep', this.form);
+      await this.$store.dispatch('stepForm/submitStepForm', this.form);
       this.$router.push({
         name: 'StepFormConfirm',
       });

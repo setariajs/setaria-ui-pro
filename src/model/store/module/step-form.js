@@ -1,5 +1,4 @@
 export default {
-  scope: 'stepForm',
   namespaced: true,
   state: {
     step: {
@@ -10,10 +9,20 @@ export default {
     },
   },
   mutations: {
-    updateStep(state, val) {
+    updateStep(state, payload) {
       const nativeState = state;
       Object.keys(nativeState.step).forEach((key) => {
-        nativeState.step[key] = val[key];
+        nativeState.step[key] = payload[key];
+      });
+    },
+  },
+  actions: {
+    submitStepForm(context, payload) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          context.commit('updateStep', payload);
+          resolve();
+        }, 1000);
       });
     },
   },
