@@ -158,28 +158,35 @@ export function getUrlParameter() {
   // return ret
 }
 
-export function findResourceByRoute(resourceList, route) {
+export function findResourceByRoute(resourceList, route, deep) {
   let targetResource = null;
 
-  function findResourceByRouteName(rList, name) {
+  function findResourceByRouteName(rList, name, currentDeep, maxDeep) {
+    const stepDeep = currentDeep + 1;
     return rList.some((item) => {
+      if (stepDeep > maxDeep) {
+        return false;
+      }
       if (item.link === name) {
         targetResource = item;
         return true;
       } else if (isArray(item.children)) {
-        return findResourceByRouteName(item.children, name);
+        return findResourceByRouteName(item.children, name, stepDeep, maxDeep);
       }
       return false;
     });
   }
 
-  route.matched.some((r) => {
-    if (findResourceByRouteName(resourceList, r.path)) {
+  const routeTreeArray = [];
+  route.matched.forEach((item) => {
+    routeTreeArray.unshift(item);
+  });
+  routeTreeArray.some((r) => {
+    if (findResourceByRouteName(resourceList, r.path, -1, deep)) {
       return true;
     }
     return false;
   });
-
   return targetResource;
 }
 

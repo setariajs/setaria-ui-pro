@@ -228,7 +228,7 @@ import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from '@/component/resize-event';
 import route from '@/config/route';
 import Auth from '@/model/resource/Auth';
-import { get, getConfigValue, getPublicResourceUrl } from '@/model/util';
+import { findResourceByRoute, get, getConfigValue, getPublicResourceUrl } from '@/model/util';
 import Reminder from './Reminder.vue';
 
 function convertRouteToMenuItem({ children, meta, path }, parentPath) {
@@ -236,11 +236,14 @@ function convertRouteToMenuItem({ children, meta, path }, parentPath) {
     ? `${parentPath}/${path}` : `${parentPath}${path}`;
   const retChildren = [];
   if (children && children.length > 0) {
-    children.forEach(item => retChildren.push(convertRouteToMenuItem(item, link)));
+    children.forEach((item) => {
+      retChildren.push(convertRouteToMenuItem(item, link));
+    });
   }
   return {
     name: meta.title,
     link,
+    path: link,
     icon: meta.icon || '',
     children: retChildren,
   };
@@ -280,7 +283,8 @@ export default {
     $route: {
       immediate: true,
       handler(val) {
-        this.activeMenu = get(val, 'path', '');
+        const menuResource = findResourceByRoute(this.menuList, val, 1);
+        this.activeMenu = get(menuResource, 'link', '');
       },
     },
   },
