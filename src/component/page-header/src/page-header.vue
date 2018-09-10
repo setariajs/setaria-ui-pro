@@ -184,6 +184,7 @@ export default {
   data() {
     return {
       nestTabActiveKey: null,
+      breadCrumb: [],
     };
   },
   watch: {
@@ -199,20 +200,21 @@ export default {
         this.$emit('update:tabActiveKey', val);
       },
     },
-  },
-  computed: {
-    breadCrumb() {
-      return this.routes.map((item, index) => {
-        const ret = item;
-        if (get(ret, 'meta.show', null) !== false) {
-          if (ret.path === '' && index === 0) {
-            ret.path = '/';
+    $route: {
+      immediate: true,
+      handler(val) {
+        this.breadCrumb = val.matched.map((item, index) => {
+          const ret = item;
+          if (get(ret, 'meta.show', null) !== false) {
+            if (ret.path === '' && index === 0) {
+              ret.path = '/';
+            }
+          } else {
+            delete ret.path;
           }
-        } else {
-          delete ret.path;
-        }
-        return ret;
-      });
+          return ret;
+        });
+      },
     },
   },
   methods: {
