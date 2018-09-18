@@ -21,6 +21,9 @@ const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/Dyn
 const BasicList = () => import(/* webpackChunkName: "list" */ '@/page/list/basic-list/BasicList');
 const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table-list/TableList');
 
+const Profile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Profile');
+const BasicProfile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Basic');
+
 const Result = () => import(/* webpackChunkName: "result" */ '@/page/result/Result');
 const Success = () => import(/* webpackChunkName: "result" */ '@/page/result/Success');
 const Error = () => import(/* webpackChunkName: "result" */ '@/page/result/Error');
@@ -43,7 +46,7 @@ export default {
         {
           path: 'dashboard',
           name: 'Dashboard',
-          meta: { title: 'dashboard', icon: 'fa-tachometer' },
+          meta: { title: 'Dashboard', icon: 'fa-tachometer' },
           component: Dashboard,
           children: [
             {
@@ -136,6 +139,20 @@ export default {
               name: 'DynamicList',
               meta: { title: '动态列表' },
               component: DynamicList,
+            },
+          ],
+        },
+        {
+          path: 'profile',
+          name: 'Profile',
+          meta: { title: '详情页', icon: 'fa-list-alt', show: false },
+          component: Profile,
+          children: [
+            {
+              path: 'basic',
+              name: 'BasicProfile',
+              meta: { title: '基础详情页' },
+              component: BasicProfile,
             },
           ],
         },
