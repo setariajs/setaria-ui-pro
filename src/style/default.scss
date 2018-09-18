@@ -99,11 +99,40 @@ h1,h2,h3,h4,h5,h6 {
       font-weight: 500;
     }
   }
+
+  td {
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .el-table__header-wrapper {
+    .el-table__header {
+      tr {
+        th {
+          background-color: #fafafa;
+        }
+      }
+    }
+  }
   .el-table__body {
     .el-table__row {
       .el-button {
         padding-top: 0;
         padding-bottom: 0;
+      }
+    }
+  }
+  .el-table__footer-wrapper {
+    tbody {
+      tr {
+        &:hover {
+          td {
+            background-color: $--background-color-base;
+          }
+        }
+      }
+      td {
+        background-color: #fff;
+        font-weight: 600;
       }
     }
   }

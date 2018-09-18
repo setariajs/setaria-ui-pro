@@ -164,8 +164,7 @@
             @select="handleTableRowSelect"
             @select-all="handleTableRowSelectAll"
             @sort-change="handleTableSortChange"
-            v-loading="isLoadingSearchResultList"
-            header-row-class-name="table-list-header-row">
+            v-loading="isLoadingSearchResultList">
             <el-table-column
               type="selection"
               width="55"
@@ -276,12 +275,6 @@
       .el-form-item__content {
         flex: 1;
       }
-    }
-  }
-
-  .table-list-header-row {
-    th {
-      background-color: #fafafa;
     }
   }
 

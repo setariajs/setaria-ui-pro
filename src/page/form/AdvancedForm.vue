@@ -114,8 +114,7 @@
       <el-card header="成员管理" shadow="never" class="member">
         <el-table
           :data="tableData"
-          v-loading="isTableDataLoading"
-          header-row-class-name="member-header-row">
+          v-loading="isTableDataLoading">
           <el-table-column label="成员姓名">
             <template slot-scope="scope">
               <el-input v-model="cacheOriginData[scope.row.key].name" v-if="scope.row.editable"/>
@@ -251,10 +250,6 @@
     }
 
     .member {
-      .header-row {
-        background-color: #fafafa;
-      }
-
       .insert-button {
         width: 100%;
         margin-top: 16px;
@@ -331,16 +326,6 @@
 }
 </style>
 <style lang="scss">
-.advanced-form {
-  .member {
-    .member-header-row {
-      th {
-        background-color: #fafafa;
-      }
-    }
-  }
-}
-
 .advanced-form-error-list-poperover {
   padding: 0;
 
