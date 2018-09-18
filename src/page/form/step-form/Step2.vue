@@ -58,7 +58,7 @@ import { digitUppercase } from '@/model/util';
 export default {
   name: 'Step2',
   data() {
-    const getValueFromStore = key => this.$store.state.stepForm.step[key] || null;
+    const getValueFromStore = key => this.$store.state.form.step[key] || null;
     return {
       form: {
         payAccount: getValueFromStore('payAccount'),

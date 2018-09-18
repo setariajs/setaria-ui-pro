@@ -25,5 +25,12 @@ export default {
         }, 1000);
       });
     },
+    submitAdvancedForm() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    },
   },
 };
