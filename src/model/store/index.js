@@ -1,11 +1,11 @@
 import common from '@/model/store/module/common';
-import stepForm from '@/model/store/module/step-form';
+import form from '@/model/store/module/form';
 
 export function getStoreConfig() {
   return {
     modules: {
       common,
-      stepForm,
+      form,
     },
   };
 }
