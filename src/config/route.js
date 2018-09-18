@@ -11,6 +11,7 @@ const Form = () => import(/* webpackChunkName: "form" */ '@/page/form/Form');
 const BasicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/BasicForm');
 const DynamicForm = () => import(/* webpackChunkName: "form" */ '@/page/form/DynamicForm');
 const StepForm = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Index');
+const AdvancedForm = () => import(/* webpackChunkName: "form" */ '@/page/form/AdvancedForm');
 const Step1 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step1');
 const Step2 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step2');
 const Step3 = () => import(/* webpackChunkName: "form" */ '@/page/form/step-form/Step3');
@@ -103,6 +104,12 @@ export default {
                   component: Step3,
                 },
               ],
+            },
+            {
+              path: 'advanced-form',
+              name: 'AdvancedForm',
+              meta: { title: '高级表单' },
+              component: AdvancedForm,
             },
           ],
         },

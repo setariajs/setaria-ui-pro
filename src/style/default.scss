@@ -6,7 +6,7 @@ html, body {
   height: 100%;
 }
 body {
-  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   color: rgba(0, 0, 0, 0.65);
   overflow: auto;
@@ -27,12 +27,26 @@ h1,h2,h3,h4,h5,h6 {
   line-height: 48px;
 }
 
+.el-input {
+  .el-input-group__append,
+  .el-input-group__prepend {
+    background-color: $--input-background-color;
+  }
+}
+
+.el-input-number__increase,
+.el-input-number__decrease {
+  background-color: $--input-background-color;
+}
+
 .el-form {
   .el-form-item__label {
     color: rgba(0, 0, 0, 0.85);
   }
   .el-form-item__content {
-    .el-select {
+    .el-select,
+    .el-range-editor--small.el-input__inner,
+    .el-date-editor--time.el-input {
       width: 100%;
     }
 
@@ -100,4 +114,10 @@ h1,h2,h3,h4,h5,h6 {
       color: rgba(0, 0, 0, 0.45);
     }
   }
+}
+
+.el-card__header {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
 }

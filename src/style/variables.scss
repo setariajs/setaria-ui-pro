@@ -3,4 +3,9 @@ $--font-path: '~setaria-ui/lib/theme-chalk/fonts';
 
 $--xs: 576px !default;
 
+$--border-color-split: #e8e8e8 !default;
+$--background-color-base: #e6f7ff !default;
+
+$--input-background-color: #fafafa !default;
+
 @import "~setaria-ui/packages/theme-chalk/src/index";
