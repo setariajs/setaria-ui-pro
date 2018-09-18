@@ -6,6 +6,7 @@ import 'setaria-ui/lib/theme-chalk/index.css';
 import { isEmpty } from '@/model/util';
 import '../style/default.scss';
 import Chart from './chart';
+import FooterToolbar from './footer-toolbar';
 import PageHeader from './page-header';
 import GridContent from './grid-content';
 import Result from './result';
@@ -13,6 +14,7 @@ import Trend from './trend';
 
 const customComponents = {
   ...Chart,
+  FooterToolbar,
   PageHeader,
   GridContent,
   Result,
