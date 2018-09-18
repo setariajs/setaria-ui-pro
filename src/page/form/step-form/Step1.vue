@@ -25,9 +25,9 @@
         <el-input v-model="form.receiverAccount">
           <el-select
             slot="prepend"
+            class="receiver-type"
             placeholder="请选择付款账户"
-            v-model="form.receiverType"
-            style="width: 100px;">
+            v-model="form.receiverType">
             <el-option label="银联卡" value="1"></el-option>
             <el-option label="支付宝" value="2"></el-option>
           </el-select>
@@ -70,11 +70,49 @@
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+@import "~setaria-ui/packages/theme-chalk/src/common/var";
+
+.step-info {
+  .step-form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+
+    .receiver-type {
+      width: 100px;
+    }
+  }
+
+  .desc {
+    padding: 0 56px;
+    color: $--color-text-secondary;
+
+    h3 {
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      color: $--color-text-secondary;
+      line-height: 32px;
+    }
+    h4 {
+      margin: 0 0 4px 0;
+      color: $--color-text-secondary;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 12px;
+      line-height: 22px;
+    }
+  }
+}
+</style>
 <script>
 export default {
   name: 'Step1',
   data() {
-    const getValueFromStore = key => this.$store.state.stepForm.step[key] || null;
+    const getValueFromStore = key => this.$store.state.form.step[key] || null;
     return {
       form: {
         payAccount: getValueFromStore('payAccount'),
@@ -116,13 +154,13 @@ export default {
   },
   computed: {
     submitting() {
-      return this.$store.state.loading.actions['stepForm/submitStepForm'];
+      return this.$store.state.loading.actions['form/submitStepForm'];
     },
   },
   methods: {
     async handleNext() {
       this.form.amount = parseFloat(this.form.amount);
-      await this.$store.dispatch('stepForm/submitStepForm', this.form);
+      await this.$store.dispatch('form/submitStepForm', this.form);
       this.$router.push({
         name: 'StepFormConfirm',
       });
@@ -130,37 +168,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import "~setaria-ui/packages/theme-chalk/src/common/var";
-
-.step-info {
-  .step-form {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 500px;
-  }
-
-  .desc {
-    padding: 0 56px;
-    color: $--color-text-secondary;
-
-    h3 {
-      font-size: 16px;
-      margin: 0 0 12px 0;
-      color: $--color-text-secondary;
-      line-height: 32px;
-    }
-    h4 {
-      margin: 0 0 4px 0;
-      color: $--color-text-secondary;
-      font-size: 14px;
-      line-height: 22px;
-    }
-    p {
-      margin-top: 0;
-      margin-bottom: 12px;
-      line-height: 22px;
-    }
-  }
-}
-</style>

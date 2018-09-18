@@ -167,7 +167,7 @@
 <style lang="scss" scoped>
   @import "../../../style/variables.scss";
 
-  .grid-content {
+  .el-grid-content {
     .el-card + .el-card {
       margin-top: 24px;
     }

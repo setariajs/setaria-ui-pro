@@ -1,10 +1,10 @@
 <template>
-  <div class="grid-content">
+  <div class="el-grid-content">
     <slot></slot>
   </div>
 </template>
 <style lang="scss" scoped>
-.grid-content {
+.el-grid-content {
   margin: 24px 24px 0;
 }
 </style>
