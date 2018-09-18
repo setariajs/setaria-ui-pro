@@ -52,7 +52,7 @@
   </el-card>
 </template>
 <style lang="scss" scoped>
-@import "~setaria-ui/packages/theme-chalk/src/common/var.scss";
+@import "@/style/variables.scss";
 
 .el-page-header {
   background: #fff;
