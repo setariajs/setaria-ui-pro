@@ -19,7 +19,8 @@
         :default-active="activeMenu"
         background-color="#001529"
         text-color="rgba(255, 255, 255, 0.65)"
-        active-text-color="#fff">
+        active-text-color="#fff"
+        :unique-opened="true">
         <el-submenu v-for="(subMenu, index) in menuList" :key="index" :index="`${index}`">
           <template slot="title">
             <i class="menu-icon fa" :class="subMenu.icon" aria-hidden="true"></i>
