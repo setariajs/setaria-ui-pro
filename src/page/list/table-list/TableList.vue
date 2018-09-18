@@ -160,12 +160,12 @@
           <el-table
             ref="table"
             :data="searchResultList"
-            stripe
             @filter-change="handleTableFilterChange"
             @select="handleTableRowSelect"
             @select-all="handleTableRowSelectAll"
             @sort-change="handleTableSortChange"
-            v-loading="isLoadingSearchResultList">
+            v-loading="isLoadingSearchResultList"
+            header-row-class-name="table-list-header-row">
             <el-table-column
               type="selection"
               width="55"
@@ -278,6 +278,13 @@
       }
     }
   }
+
+  .table-list-header-row {
+    th {
+      background-color: #fafafa;
+    }
+  }
+
   .table-list__dialog {
     .el-dialog__body {
       padding-bottom: 10px;
@@ -325,6 +332,9 @@ $--col--padding: 24px !default;
     color: rgba(0, 0, 0, 0.65);
     border-radius: 4px;
     font-size: 14px;
+    margin-bottom: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
 
     .el-icon-info {
       color: #1890ff;
