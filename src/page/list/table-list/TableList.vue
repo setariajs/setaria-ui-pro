@@ -201,7 +201,8 @@
               label="上次调度时间"
               prop="updatedAt"
               column-key="updatedAt"
-              sortable="custom">
+              sortable="custom"
+              min-width="100px">
               <template slot-scope="scope">
                 {{ formatDate(scope.row.updatedAt) }}
               </template>

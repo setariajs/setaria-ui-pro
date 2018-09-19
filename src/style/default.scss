@@ -22,6 +22,12 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: 500
 }
 
+.el-button {
+  &.el-button--small {
+    font-size: 14px;
+  }
+}
+
 .el-menu-item, .el-submenu__title,
 .el-submenu .el-menu-item {
   height: 48px;
@@ -44,15 +50,22 @@ h1,h2,h3,h4,h5,h6 {
   .el-form-item__label {
     color: rgba(0, 0, 0, 0.85);
   }
+
+  .el-form-item--small {
+    .el-form-item__content {
+      .el-input__inner,
+      .el-textarea__inner,
+      .el-range-input {
+        font-size: 14px;
+      }
+    }
+  }
+
   .el-form-item__content {
     .el-select,
     .el-range-editor--small.el-input__inner,
     .el-date-editor--time.el-input {
       width: 100%;
-    }
-
-    .el-button--small {
-      font-size: 14px;
     }
   }
 }
@@ -69,11 +82,26 @@ h1,h2,h3,h4,h5,h6 {
 
   .el-dialog__header {
     border-bottom: 1px solid #e8e8e8;
+    padding: 16px 24px;
+
+    .el-dialog__title {
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
 
   .el-dialog__footer {
     border-top: 1px solid #e8e8e8;
     padding-bottom: 10px;
+  }
+}
+
+.el-dialog__headerbtn {
+  i {
+    &.el-dialog__close {
+      line-height: 58px;
+    }
   }
 }
 

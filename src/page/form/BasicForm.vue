@@ -84,6 +84,9 @@
   }
 </style>
 <script>
+import { Message } from 'setaria';
+import Notice from '@/component/notice/index';
+
 export default {
   data() {
     return {
@@ -161,7 +164,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submit!');
+      Notice.showMessage(new Message('MBM001S', ['', '创建']));
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

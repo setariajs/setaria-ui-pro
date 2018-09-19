@@ -13,7 +13,7 @@
             <span>项目名称</span>
           </div>
           <el-row class="project-description">
-            <el-col :xs="24" :sm="12" :md="12" :lg="8">
+            <el-col :xs="24" :sm="12" :md="12" :lg="7">
               <span class="label">
                 项目 ID：
               </span>
@@ -25,7 +25,7 @@
               </span>
               曲丽丽
             </el-col>
-            <el-col :xs="24" :sm="12" :md="12" :lg="9">
+            <el-col :xs="24" :sm="12" :md="12" :lg="10">
               <span class="label">
                 生效时间：
               </span>

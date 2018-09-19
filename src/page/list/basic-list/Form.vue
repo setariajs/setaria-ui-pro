@@ -1,11 +1,16 @@
 <template>
-  <el-form ref="form" :model="form" :rules="rules" label-position="right">
+  <el-form
+    ref="form"
+    :model="form"
+    :rules="rules"
+    label-position="right"
+    size="small">
     <el-form-item
       label="任务名称"
       :label-width="itemLayout.labelWidth"
       :wrapper-width="itemLayout.wrapperWidth"
       prop="title">
-      <el-input v-model="form.title"/>
+      <el-input v-model="form.title" placeholder="请输入任务名称"/>
     </el-form-item>
     <el-form-item
       label="开始时间"
@@ -17,14 +22,14 @@
         type="datetime"
         v-model="form.startDateTime"
         value-format="yyyy-MM-dd HH:mm:ss"
-        placeholder=""/>
+        placeholder="请选择开始时间"/>
     </el-form-item>
     <el-form-item
       label="任务负责人"
       :label-width="itemLayout.labelWidth"
       :wrapper-width="itemLayout.wrapperWidth"
       prop="owner.name">
-      <el-select v-model="form.owner.name">
+      <el-select v-model="form.owner.name" placeholder="请选择任务负责人">
         <el-option
           v-for="user in userList"
           :key="user.name"
@@ -37,7 +42,11 @@
       :label-width="itemLayout.labelWidth"
       :wrapper-width="itemLayout.wrapperWidth"
       prop="description">
-      <el-input type="textarea" v-model="form.description"/>
+      <el-input
+        type="textarea"
+        v-model="form.description"
+        placeholder="请至少输入5个字符"
+        :rows="4"/>
     </el-form-item>
   </el-form>
 </template>

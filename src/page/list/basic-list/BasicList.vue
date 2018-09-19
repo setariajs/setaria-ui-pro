@@ -87,11 +87,19 @@
     <el-dialog
       class="basic-list__form"
       :title="`任务${typeof selectedTask === 'object' ? '编辑' : '添加'}`"
-      :visible.sync="formVisible">
+      :visible.sync="formVisible"
+      width="640px">
       <basic-form ref="taskForm" v-model="selectedTask" v-if="formVisible"></basic-form>
       <span slot="footer">
-        <el-button @click="handleCloseForm">取 消</el-button>
-        <el-button type="primary" @click="handleUpdateForm">确 定</el-button>
+        <el-button
+          class="dialog-button"
+          @click="handleCloseForm"
+          size="small">取 消</el-button>
+        <el-button
+          class="dialog-button"
+          type="primary"
+          @click="handleUpdateForm"
+          size="small">保 存</el-button>
       </span>
     </el-dialog>
     <el-dialog
@@ -220,7 +228,7 @@
           display: inline-block;
           vertical-align: middle;
           font-size: 14px;
-          margin-left: 40px;
+          margin-left: 37px;
           text-align: right;
 
           &:last-child {
@@ -256,6 +264,10 @@
 
     .pagination {
       margin-top: 24px;
+    }
+
+    .dialog-button {
+      font-size: 14px;
     }
   }
 </style>
