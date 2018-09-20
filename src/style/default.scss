@@ -195,3 +195,9 @@ h1,h2,h3,h4,h5,h6 {
   color: rgba(0, 0, 0, 0.85);
   font-weight: 500;
 }
+
+.el-card--inner {
+  .el-card__header {
+    font-size: 14px;
+  }
+}

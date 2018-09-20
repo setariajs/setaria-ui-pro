@@ -23,6 +23,7 @@ const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table
 
 const Profile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Profile');
 const BasicProfile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Basic');
+const AdvancedProfile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Advanced');
 
 const Result = () => import(/* webpackChunkName: "result" */ '@/page/result/Result');
 const Success = () => import(/* webpackChunkName: "result" */ '@/page/result/Success');
@@ -153,6 +154,12 @@ export default {
               name: 'BasicProfile',
               meta: { title: '基础详情页' },
               component: BasicProfile,
+            },
+            {
+              path: 'advanced',
+              name: 'AdvancedProfile',
+              meta: { title: '高级详情页' },
+              component: AdvancedProfile,
             },
           ],
         },

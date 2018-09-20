@@ -6,6 +6,13 @@ export async function fetchBasic() {
   });
 }
 
+export async function fetchAdvanced() {
+  return apiHttp.get('profile/advanced', null, {
+    showLoading: false,
+  });
+}
+
 export default {
   fetchBasic,
+  fetchAdvanced,
 };
