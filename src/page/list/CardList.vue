@@ -36,7 +36,7 @@
           </el-button>
         </el-list-item>
         <el-list-item v-for="(data, index) in listData" :key="index">
-          <el-card shadow="hover">
+          <el-card shadow="hover" class="card-list-item">
             <el-card-meta :description="data.description">
               <a slot="title">
                 {{ data.title }}
@@ -65,8 +65,6 @@
 
 .card-list {
   .el-card {
-    cursor: pointer;
-
     .el-card-meta__detail-title {
       margin-bottom: 12px;
       & > a {
@@ -128,6 +126,21 @@
     }
   }
 
+  .extra-img {
+    margin-top: -60px;
+    text-align: center;
+    width: 195px;
+    img {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: $--sm) {
+    .extra-img {
+      display: none;
+    }
+  }
+
   .insert-button {
     width: 100%;
     height: 187px;
@@ -143,24 +156,13 @@
     }
   }
 
-  .card-avatar {
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 48px;
-  }
+  .card-list-item {
+    cursor: pointer;
 
-  .extra-img {
-    margin-top: -60px;
-    text-align: center;
-    width: 195px;
-    img {
-      width: 100%;
-    }
-  }
-
-  @media screen and (max-width: $--sm) {
-    .extra-img {
-      display: none;
+    .card-avatar {
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: 48px;
     }
   }
 }
