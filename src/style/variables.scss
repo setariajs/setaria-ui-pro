@@ -1,14 +1,14 @@
+@import "~setaria-ui/packages/theme-chalk/src/common/var";
+
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~setaria-ui/lib/theme-chalk/fonts';
 
-$--border-color-split: #e8e8e8 !default;
-$--background-color-base: #e6f7ff !default;
+$--border-color-split: #e8e8e8;
+$--background-color-base: #e6f7ff;
 
-$--input-background-color: #fafafa !default;
+$--input-background-color: #fafafa;
 
-@import "~setaria-ui/packages/theme-chalk/src/index";
+$--xs: 576px;
 
-$--xs: 576px !default;
-
-$--heading-color: $--color-text-primary !default;
+$--heading-color: $--color-text-primary;
 
