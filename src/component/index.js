@@ -30,10 +30,10 @@ const customComponents = {
 function install(VueInstance) {
   /* istanbul ignore if */
   if (install.installed) return;
-  // 加载自定义组件
+  // 注册自定义组件
   Object.keys(customComponents).forEach((key) => {
     const component = customComponents[key];
-    // 加载组件
+    // 注册组件
     VueInstance.component(component.name, component);
   });
 }
