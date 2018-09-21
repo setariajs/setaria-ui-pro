@@ -71,7 +71,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import "~setaria-ui/packages/theme-chalk/src/common/var";
+@import "@/style/variables.scss";
 
 .step-info {
   .step-form {
