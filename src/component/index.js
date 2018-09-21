@@ -2,7 +2,6 @@ import Vue from 'vue';
 import SetariaUI from 'setaria-ui';
 import locale from 'setaria-ui/lib/locale/lang/zh-CN';
 import 'font-awesome/css/font-awesome.css';
-import { isEmpty } from '@/model/util';
 import '../style/default.scss';
 import Chart from './chart';
 import Description from './description';
@@ -31,16 +30,6 @@ const customComponents = {
 function install(VueInstance) {
   /* istanbul ignore if */
   if (install.installed) return;
-  // 使用中文语言加载Setaria UI
-  SetariaUI.install(VueInstance, locale);
-  // 批量加载Setaria-UI组件
-  Object.keys(SetariaUI).forEach((key) => {
-    const component = SetariaUI[key];
-    if (!isEmpty(component.name) && component.name.indexOf('El') === 0) {
-      // 加载组件
-      // VueInstance.component(component.name, component);
-    }
-  });
   // 加载自定义组件
   Object.keys(customComponents).forEach((key) => {
     const component = customComponents[key];
@@ -56,6 +45,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 // 加载UI组件
 Vue.use(install);
+// 使用中文语言加载Setaria UI
+Vue.use(SetariaUI, locale);
 
 const UI = Object.assign({}, SetariaUI, {
   install,
