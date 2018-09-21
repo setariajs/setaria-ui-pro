@@ -116,7 +116,7 @@
   </el-grid-content>
 </template>
 <style lang="scss">
-  @import "../../../style/variables.scss";
+  @import "@/style/variables.scss";
 
   .basic-list__card {
     .el-card__header {
@@ -173,7 +173,7 @@
   }
 </style>
 <style lang="scss" scoped>
-  @import "../../../style/variables.scss";
+  @import "@/style/variables.scss";
 
   .el-grid-content {
     .el-card + .el-card {
