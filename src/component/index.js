@@ -2,7 +2,6 @@ import Vue from 'vue';
 import SetariaUI from 'setaria-ui';
 import locale from 'setaria-ui/lib/locale/lang/zh-CN';
 import 'font-awesome/css/font-awesome.css';
-import 'setaria-ui/lib/theme-chalk/index.css';
 import { isEmpty } from '@/model/util';
 import '../style/default.scss';
 import Chart from './chart';
@@ -39,7 +38,7 @@ function install(VueInstance) {
     const component = SetariaUI[key];
     if (!isEmpty(component.name) && component.name.indexOf('El') === 0) {
       // 加载组件
-      VueInstance.component(component.name, component);
+      // VueInstance.component(component.name, component);
     }
   });
   // 加载自定义组件

@@ -1,4 +1,5 @@
 import mockjs from 'mockjs';
+import api from './api';
 import rule from './rule';
 import profile from './profile';
 
@@ -46,6 +47,7 @@ export default {
     }];
   },
   'POST /api/logout': () => [200, {}],
+  ...api,
   ...rule,
   ...profile,
 };

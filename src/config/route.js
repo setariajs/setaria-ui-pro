@@ -20,6 +20,7 @@ const List = () => import(/* webpackChunkName: "list" */ '@/page/list/List');
 const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/DynamicList');
 const BasicList = () => import(/* webpackChunkName: "list" */ '@/page/list/basic-list/BasicList');
 const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table-list/TableList');
+const CardList = () => import(/* webpackChunkName: "list" */ '@/page/list/CardList');
 
 const Profile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Profile');
 const BasicProfile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Basic');
@@ -134,6 +135,12 @@ export default {
               name: 'BasicList',
               meta: { title: '标准列表' },
               component: BasicList,
+            },
+            {
+              path: 'card-list',
+              name: 'CardList',
+              meta: { title: '卡片列表' },
+              component: CardList,
             },
             {
               path: 'dynamic-list',
