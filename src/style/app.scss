@@ -23,6 +23,25 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: 500
 }
 
+a {
+  color: $--color-primary;
+  background-color: transparent;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+
+  &:active, &:hover {
+    outline: 0;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $--color-primary-light-3
+  }
+}
+
 .el-button {
   &.el-button--small {
     font-size: 14px;

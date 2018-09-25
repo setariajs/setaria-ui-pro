@@ -100,19 +100,6 @@
     margin-top: 16px;
     a {
       margin-right: 32px;
-      color: #1890FF;
-      background-color: transparent;
-      text-decoration: none;
-      outline: none;
-      cursor: pointer;
-      -webkit-transition: color .3s;
-      transition: color .3s;
-
-      &:hover {
-        color: #40a9ff;
-        outline: 0;
-        text-decoration: none;
-      }
 
       img {
         width: 24px;
