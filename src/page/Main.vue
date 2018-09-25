@@ -26,12 +26,40 @@
             <i class="menu-icon fa" :class="subMenu.icon" aria-hidden="true"></i>
             <span>{{ subMenu.name }}</span>
           </template>
+          <template
+            v-for="( secondMenu, secondIndex ) in subMenu.children"
+            v-if="subMenu.children">
+            <template
+              v-if="secondMenu.children.length > 0">
+              <el-submenu
+                :key="`${index}-${secondIndex}`"
+                :index="`${index}-${secondIndex}`">
+                <template slot="title">
+                  {{ secondMenu.name }}
+                </template>
+                <el-menu-item
+                  class="nav-menu-item"
+                  v-for="( thirdMenu, thirdIndex ) in secondMenu.children"
+                  :key="`${index}-${secondIndex}-${thirdIndex}`"
+                  :index="thirdMenu.link">
+                  <span slot="title">{{ thirdMenu.name }}</span>
+                </el-menu-item>
+              </el-submenu>
+            </template>
+            <el-menu-item
+              class="nav-menu-item"
+              :index="secondMenu.link"
+              v-else
+              :key="secondMenu.link">
+              <span slot="title">{{ secondMenu.name }}</span>
+            </el-menu-item>
+          </template>
           <el-menu-item
             class="nav-menu-item"
-            v-for="menu in subMenu.children"
-            :index="menu.link"
-            :key="menu.link">
-            <span slot="title">{{ menu.name }}</span>
+            :index="subMenu.link"
+            v-else
+            :key="subMenu.link">
+            <span slot="title">{{ subMenu.name }}</span>
           </el-menu-item>
         </el-submenu>
       </el-menu>
@@ -113,13 +141,15 @@
 <style lang="scss" scoped>
 @import "../style/variables.scss";
 
+$--app-brand-height: 64px;
+
 .main {
   width: 100%;
   height: 100%;
 
   .brand {
-    height: 64px;
-    line-height: 64px;
+    height: $--app-brand-height;
+    line-height: $--app-brand-height;
     background: #001529;
     font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     padding-left: 24px;
@@ -144,7 +174,7 @@
     transition: width .2s;
 
     .nav-menu {
-      height: 100%;
+      height: calc(100% - #{$--app-brand-height});
 
       &.el-menu {
         .el-submenu.is-active {
@@ -236,7 +266,7 @@ function convertRouteToMenuItem({ children, meta, path }, parentPath) {
   const link = parentPath.indexOf('/') !== parentPath.length - 1
     ? `${parentPath}/${path}` : `${parentPath}${path}`;
   const retChildren = [];
-  if (children && children.length > 0) {
+  if (children && children.length > 0 && get(meta, 'hideChildrenInMenu', false) !== true) {
     children.forEach((item) => {
       retChildren.push(convertRouteToMenuItem(item, link));
     });
@@ -284,7 +314,7 @@ export default {
     $route: {
       immediate: true,
       handler(val) {
-        const menuResource = findResourceByRoute(this.menuList, val, 1);
+        const menuResource = findResourceByRoute(this.menuList, val, 2);
         this.activeMenu = get(menuResource, 'link', '');
       },
     },
