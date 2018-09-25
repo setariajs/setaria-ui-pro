@@ -108,6 +108,12 @@
       -webkit-transition: color .3s;
       transition: color .3s;
 
+      &:hover {
+        color: #40a9ff;
+        outline: 0;
+        text-decoration: none;
+      }
+
       img {
         width: 24px;
       }
