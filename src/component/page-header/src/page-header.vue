@@ -218,9 +218,16 @@ export default {
     },
   },
   methods: {
-    handleTabClick(tab, evt) {
+    /**
+     * Tab点击事件处理
+     * @event
+     * @param tabCompoent 被点击的Tab标签页的实例
+     * @param evt Event事件对象
+     */
+    handleTabClick(tabComponent, evt) {
       // 保证先刷新tabActiveKey的值，再触发tab-click事件
       this.$nextTick(() => {
+        const tab = this.tabList.find(item => item.key === this.nestTabActiveKey);
         this.$emit('tab-click', tab, evt);
       });
     },
