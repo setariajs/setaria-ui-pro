@@ -10,6 +10,8 @@ import FooterToolbar from './footer-toolbar';
 import PageHeader from './page-header';
 import GridContent from './grid-content';
 import Result from './result';
+import TagSelect from './tag-select';
+import TagSelectItem from './tag-select-item';
 import Trend from './trend';
 
 // 使用中文语言加载Setaria UI
@@ -23,6 +25,8 @@ const customComponents = {
   PageHeader,
   GridContent,
   Result,
+  TagSelect,
+  TagSelectItem,
   Trend,
 };
 
