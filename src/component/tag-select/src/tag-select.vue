@@ -5,16 +5,15 @@
       'has-expand': expandable,
       'expanded': expand,
     }">
-    <el-checkbox-group v-model="selectAllModel" @change="handleSelectAllChange"
-      class="select-all-group">
-      <el-tag-select-item :label="selectAllLabel">
-        全部
-      </el-tag-select-item>
-    </el-checkbox-group>
     <el-checkbox-group
       v-model="model"
       class="select-item-group"
       @change="handleChange">
+      <el-tag-select-item
+        :label="selectAllLabel"
+        @click.native="handleSelectAll">
+        全部
+      </el-tag-select-item>
       <slot></slot>
     </el-checkbox-group>
     <a class="trigger" v-if="expandable" @click="handleExpand">
@@ -24,24 +23,17 @@
   </div>
 </template>
 <style lang="scss">
+@import '@/style/variables.scss';
+
 $-checkbox-group-split-width: 24px;
 
 .el-tag-select {
-  position: relative;
   overflow: hidden;
   max-height: 32px;
   line-height: 32px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  display: flex;
-
-  .select-all-group {
-    margin-right: $-checkbox-group-split-width;
-  }
-
-  .select-item-group {
-    flex: 1;
-  }
+  display: block;
 
   &.has-expand {
     padding-right: 50px;
@@ -66,8 +58,6 @@ $-checkbox-group-split-width: 24px;
       }
 
       .el-checkbox-button {
-        // 解决高度异常的问题
-        display: inline-flex;
 
         .el-checkbox-button__inner {
           border: 0;
@@ -76,6 +66,12 @@ $-checkbox-group-split-width: 24px;
           font-size: 14px;
           height: 22px;
           line-height: 22px;
+        }
+
+        &:not(.is-checked) {
+          .el-checkbox-button__inner {
+            color: $--color-text-secondary;
+          }
         }
       }
     }
@@ -108,16 +104,15 @@ export default {
       expand: false,
     };
   },
-  computed: {
-    isSelectAll() {
-      return this.model.length === this.selectItemList.length;
-    },
-  },
   watch: {
     value: {
-      immediate: true,
-      handler(val) {
-        this.model = val;
+      handler(val, oldVal) {
+        if (val.length !== oldVal.length
+          || (val.length === oldVal.length
+            && val.every(valItem => oldVal.findIndex(item => item !== valItem)))) {
+          this.model = [...val];
+          this.refreshSelectAll(this.model);
+        }
       },
     },
   },
@@ -130,32 +125,62 @@ export default {
   },
   mounted() {
     // 解决全部TagSelectItem组件没有渲染结束后，无法正确设置全部按钮的状态问题
-    this.refreshSelectAll();
+    this.model = [...this.value];
+    this.refreshSelectAll(this.model);
   },
   methods: {
-    handleSelectAllChange() {
-      // 选中【全部】的场合
-      if (this.selectAllModel.findIndex(item => item === this.selectAllLabel) !== -1) {
-        if (!this.isSelectAll) {
-          this.model = this.selectItemList.map(selectItem => selectItem.label);
+    handleSelectAll() {
+      this.$nextTick(() => {
+        // 选中【全部】的场合
+        if (this.model.findIndex(item => item === this.selectAllLabel) !== -1) {
+          this.selectAllItem(this.model);
+        } else {
+          this.removeItem(this.model);
         }
-      } else {
-        this.model = [];
-      }
+      });
     },
-    handleChange() {
-      this.refreshSelectAll();
-      this.$emit('input', this.model);
+    handleChange(val) {
+      this.refreshSelectAll(val);
     },
-    refreshSelectAll() {
-      if (this.isSelectAll) {
-        this.selectAllModel = [this.selectAllLabel];
+    refreshSelectAll(val) {
+      if (this.isSelectAll(val)) {
+        this.selectAllItem(val);
       } else {
-        this.selectAllModel = [];
+        const index = val.findIndex(item => item === this.selectAllLabel);
+        if (index !== -1) {
+          this.removeItem(val, index);
+        }
       }
     },
     handleExpand() {
       this.expand = !this.expand;
+    },
+    isSelectAll(val) {
+      const arr = val.filter(item => item !== this.selectAllLabel);
+      return arr.length === this.selectItemList.length;
+    },
+    selectAllItem(val) {
+      this.selectItemList.forEach(({ label }) => {
+        if (val.findIndex(item => item === label) === -1) {
+          val.push(label);
+        }
+      });
+      if (val.findIndex(item => item === this.selectAllLabel) === -1) {
+        val.unshift(this.selectAllLabel);
+      }
+      this.triggerValueChange();
+    },
+    removeItem(val, index) {
+      if (typeof index === 'number') {
+        val.splice(index, 1);
+      } else {
+        val.splice(0, val.length);
+      }
+      this.triggerValueChange();
+    },
+    triggerValueChange() {
+      const ret = this.model.filter(item => item !== this.selectAllLabel);
+      this.$emit('input', ret);
     },
   },
 };
