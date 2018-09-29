@@ -8,7 +8,7 @@ export default {
   mutations: {
     updateFakeList(state, payload) {
       const nativeState = state;
-      nativeState.fakeList = payload;
+      nativeState.fakeList = nativeState.fakeList.concat(payload);
     },
   },
   actions: {

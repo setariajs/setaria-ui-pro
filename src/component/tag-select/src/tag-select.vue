@@ -49,6 +49,7 @@ $-checkbox-group-split-width: 24px;
     display: inline-block;
     font-size: 14px;
     line-height: 32px;
+    font-weight: 400;
 
     .el-tag-select-item {
       margin-right: $-checkbox-group-split-width;
@@ -70,7 +71,7 @@ $-checkbox-group-split-width: 24px;
 
         &:not(.is-checked) {
           .el-checkbox-button__inner {
-            color: $--color-text-secondary;
+            color: $--color-text-regular;
           }
         }
       }

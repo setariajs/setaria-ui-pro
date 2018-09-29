@@ -1,23 +1,23 @@
 import mockjs from 'mockjs';
 
 const titles = [
-  'Alipay',
+  'Vue',
+  'Element',
   'Angular',
   'Ant Design',
-  'Ant Design Pro',
+  'Setaria UI Pro',
   'Bootstrap',
   'React',
-  'Vue',
   'Webpack',
 ];
 const avatars = [
-  'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
+  'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
+  'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Element
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
   'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png', // Ant Design
   'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Ant Design Pro
   'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png', // Bootstrap
   'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
-  'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
   'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png', // Webpack
 ];
 
@@ -73,7 +73,7 @@ function fakeList(count) {
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
-      href: 'https://ant.design',
+      href: 'http://bluejfox.github.io/setaria-ui-pro',
       updatedAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
       createdAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
       subDescription: desc[i % 5],
@@ -85,7 +85,7 @@ function fakeList(count) {
       like: Math.ceil(Math.random() * 100) + 100,
       message: Math.ceil(Math.random() * 10) + 10,
       content:
-        '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+        '段落示意：Setaria UI Pro，用最小的工作量，无缝接入Vue生态，提供跨越设计与开发的体验解决方案。Setaria UI Pro，用最小的工作量，无缝接入Vue生态，提供跨越设计与开发的体验解决方案。Setaria UI Pro，用最小的工作量，无缝接入Vue生态，提供跨越设计与开发的体验解决方案。',
       members: [
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',

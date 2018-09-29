@@ -21,6 +21,10 @@ const DynamicList = () => import(/* webpackChunkName: "list" */ '@/page/list/Dyn
 const BasicList = () => import(/* webpackChunkName: "list" */ '@/page/list/basic-list/BasicList');
 const TableList = () => import(/* webpackChunkName: "list" */ '@/page/list/table-list/TableList');
 const CardList = () => import(/* webpackChunkName: "list" */ '@/page/list/CardList');
+const Search = () => import(/* webpackChunkName: "list" */ '@/page/list/Search');
+const ArticleList = () => import(/* webpackChunkName: "list" */ '@/page/list/ArticleList');
+const ProjectList = () => import(/* webpackChunkName: "list" */ '@/page/list/ProjectList');
+const ApplicationList = () => import(/* webpackChunkName: "list" */ '@/page/list/ApplicationList');
 
 const Profile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Profile');
 const BasicProfile = () => import(/* webpackChunkName: "profile" */ '@/page/profile/Basic');
@@ -86,7 +90,7 @@ export default {
             {
               path: 'step-form',
               name: 'StepForm',
-              meta: { title: '分步表单' },
+              meta: { title: '分步表单', hideChildrenInMenu: true },
               component: StepForm,
               redirect: { name: 'StepFormInfo' },
               children: [
@@ -147,6 +151,32 @@ export default {
               name: 'DynamicList',
               meta: { title: '动态列表' },
               component: DynamicList,
+            },
+            {
+              path: 'search',
+              name: 'Search',
+              meta: { title: '搜索列表', show: false },
+              component: Search,
+              children: [
+                {
+                  path: 'article-list',
+                  name: 'ArticleList',
+                  meta: { title: '搜索列表（文章）' },
+                  component: ArticleList,
+                },
+                {
+                  path: 'project-list',
+                  name: 'ProjectList',
+                  meta: { title: '搜索列表（项目）' },
+                  component: ProjectList,
+                },
+                {
+                  path: 'application-list',
+                  name: 'ApplicationList',
+                  meta: { title: '搜索列表（应用）' },
+                  component: ApplicationList,
+                },
+              ],
             },
           ],
         },
