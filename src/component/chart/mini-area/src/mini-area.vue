@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from '../../../resize-event';
 
 export default {
@@ -33,7 +32,6 @@ export default {
   },
   data() {
     return {
-      debounceResize: null,
     };
   },
   computed: {
@@ -99,15 +97,12 @@ export default {
       };
     },
   },
-  created() {
-    this.debounceResize = debounce(200, () => this.$refs.chart.resize());
-  },
   mounted() {
-    addResizeListener(this.$el, this.debounceResize);
+    addResizeListener(this.$el, this.$refs.chart.resize);
   },
   beforeDestroy() {
-    if (this.$el) {
-      removeResizeListener(this.$el, this.debounceResize);
+    if (this.$el && this.$refs.chart.resize) {
+      removeResizeListener(this.$el, this.$refs.chart.resize);
     }
   },
 };

@@ -21,7 +21,8 @@
     "setaria-ui": "^1.4.0",
     "throttle-debounce": "^1.0.1",
     "vue": "^2.5.13",
-    "vue-echarts": "^3.0.7"
+    "vue-echarts": "^3.0.7",
+    "resize-observer-polyfill": "^1.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",

@@ -46,7 +46,6 @@
 }
 </style>
 <script>
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from '../../resize-event';
 
 export default {
@@ -56,11 +55,8 @@ export default {
       width: '',
     };
   },
-  created() {
-    this.debounceResize = debounce(200, () => this.resizeFooterToolbar());
-  },
   mounted() {
-    addResizeListener(this.$el, this.debounceResize);
+    addResizeListener(this.$el, this.resizeFooterToolbar);
   },
   methods: {
     resizeFooterToolbar() {
@@ -70,8 +66,8 @@ export default {
     },
   },
   beforeDestroy() {
-    if (this.$el) {
-      removeResizeListener(this.$el, this.debounceResize);
+    if (this.$el && this.resizeFooterToolbar) {
+      removeResizeListener(this.$el, this.resizeFooterToolbar);
     }
   },
 };

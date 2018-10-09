@@ -255,7 +255,6 @@ $--app-brand-height: 64px;
 </style>
 
 <script>
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from '@/component/resize-event';
 import route from '@/config/route';
 import Auth from '@/model/resource/Auth';
@@ -319,21 +318,12 @@ export default {
       },
     },
   },
-  created() {
-    this.debounceResize = debounce(200, () => {
-      if (this.$el.clientWidth <= 992) {
-        this.isMenuCollapse = true;
-      } else {
-        this.isMenuCollapse = false;
-      }
-    });
-  },
   mounted() {
-    addResizeListener(this.$el, this.debounceResize);
+    addResizeListener(this.$el, this.handleResize);
   },
   beforeDestroy() {
-    if (this.$el) {
-      removeResizeListener(this.$el, this.debounceResize);
+    if (this.$el && this.handleResize) {
+      removeResizeListener(this.$el, this.handleResize);
     }
   },
   methods: {
@@ -375,6 +365,16 @@ export default {
      */
     forwardToLogin() {
       this.$router.push({ name: 'Login' });
+    },
+    /**
+     * Resize事件处理
+     */
+    handleResize() {
+      if (this.$el.clientWidth <= 992) {
+        this.isMenuCollapse = true;
+      } else {
+        this.isMenuCollapse = false;
+      }
     },
   },
   components: {
