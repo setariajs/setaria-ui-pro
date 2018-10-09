@@ -6,6 +6,7 @@ import '@/style/app.scss';
 import Chart from './chart';
 import Description from './description';
 import DescriptionList from './description-list';
+import Ellipsis from './ellipsis';
 import FooterToolbar from './footer-toolbar';
 import PageHeader from './page-header';
 import GridContent from './grid-content';
@@ -21,6 +22,7 @@ const customComponents = {
   ...Chart,
   Description,
   DescriptionList,
+  Ellipsis,
   FooterToolbar,
   PageHeader,
   GridContent,
