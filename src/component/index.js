@@ -3,6 +3,8 @@ import SetariaUI from 'setaria-ui';
 import locale from 'setaria-ui/lib/locale/lang/zh-CN';
 import 'font-awesome/css/font-awesome.css';
 import '@/style/app.scss';
+import AvatarList from './avatar-list';
+import AvatarItem from './avatar-item';
 import Chart from './chart';
 import Description from './description';
 import DescriptionList from './description-list';
@@ -19,6 +21,8 @@ import Trend from './trend';
 Vue.use(SetariaUI, locale);
 
 const customComponents = {
+  AvatarList,
+  AvatarItem,
   ...Chart,
   Description,
   DescriptionList,
