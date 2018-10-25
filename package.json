@@ -17,12 +17,12 @@
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
+    "resize-observer-polyfill": "^1.5.0",
     "setaria": "^0.3.3",
     "setaria-ui": "^1.4.0",
     "throttle-debounce": "^1.0.1",
     "vue": "^2.5.13",
-    "vue-echarts": "^3.0.7",
-    "resize-observer-polyfill": "^1.5.0"
+    "vue-echarts": "^3.0.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
