@@ -41,6 +41,10 @@ export function getNow(format = 'LL') {
   return moment().format(format);
 }
 
+export function fromNow(date) {
+  return moment(date).fromNow();
+}
+
 /**
   * 对日期使用指定格式进行格式化
   */
