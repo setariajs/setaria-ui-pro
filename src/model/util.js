@@ -230,3 +230,14 @@ export function digitUppercase(n) {
     .replace(/(零.)+/g, '零')
     .replace(/^整$/, '零元整');
 }
+
+export function formatWan(val) {
+  const v = val * 1;
+  if (!v || Number.isNaN(v)) return '';
+
+  let result = val;
+  if (val > 10000) {
+    result = Math.floor(val / 10000);
+  }
+  return result;
+}
