@@ -37,6 +37,12 @@ export default {
   created() {
     // 程序抛出的错误信息处理
     Setaria.config.errorHanlder = ({ noIdMessage }) => {
+      // This error means that ResizeObserver was not able to deliver all observations
+      // within a single animation frame. It is benign (your site will not break)
+      // https://stackoverflow.com/questions/49384120/resizeobserver-loop-limit-exceeded
+      if (noIdMessage === 'ResizeObserver loop limit exceeded') {
+        return;
+      }
       Message.error({
         message: noIdMessage,
       });

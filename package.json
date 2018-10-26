@@ -17,7 +17,6 @@
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
-    "resize-observer-polyfill": "^1.5.0",
     "setaria": "^0.3.3",
     "setaria-ui": "^1.4.0",
     "throttle-debounce": "^1.0.1",

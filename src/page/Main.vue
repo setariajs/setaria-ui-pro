@@ -255,7 +255,7 @@ $--app-brand-height: 64px;
 </style>
 
 <script>
-import { addResizeListener, removeResizeListener } from '@/component/resize-event';
+import { addResizeListener, removeResizeListener } from 'setaria-ui/src/utils/resize-event';
 import route from '@/config/route';
 import Auth from '@/model/resource/Auth';
 import { findResourceByRoute, get, getConfigValue, getPublicResourceUrl } from '@/model/util';
