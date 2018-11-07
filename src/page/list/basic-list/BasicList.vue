@@ -1,6 +1,6 @@
 <template>
   <el-grid-content>
-    <el-card>
+    <el-card class="statistical-card">
       <el-row>
         <el-col :xs="24" :sm="8">
           <info title="我的待办" value="8个任务" bordered/>
@@ -13,7 +13,7 @@
         </el-col>
       </el-row>
     </el-card>
-    <el-card class="basic-list__card">
+    <el-card class="list-card">
       <div slot="header">
         <span class="title">标准列表</span>
         <div class="extra-content">
@@ -85,7 +85,7 @@
       </el-pagination>
     </el-card>
     <el-dialog
-      class="basic-list__form"
+      class="form"
       :title="`任务${typeof selectedTask === 'object' ? '编辑' : '添加'}`"
       :visible.sync="formVisible"
       width="640px">
@@ -115,63 +115,6 @@
     </el-dialog>
   </el-grid-content>
 </template>
-<style lang="scss">
-  @import "@/style/variables.scss";
-
-  .basic-list__card {
-    .el-card__header {
-      border-bottom: none;
-    }
-
-    .el-card__body {
-      padding-top: 0;
-    }
-  }
-
-  .basic-list__info {
-    position: relative;
-    text-align: center;
-
-    span {
-      color: rgba(0, 0, 0, 0.45);
-      display: inline-block;
-      font-size: 14px;
-      line-height: 22px;
-      margin-bottom: 4px;
-    }
-
-    p {
-      color: rgba(0, 0, 0, 0.85);
-      font-size: 24px;
-      line-height: 32px;
-      margin: 0;
-    }
-
-    em {
-      background-color: #e8e8e8;
-      position: absolute;
-      height: 56px;
-      width: 1px;
-      top: 0;
-      right: 0;
-    }
-  }
-  @media screen and (max-width: $--sm) {
-    .basic-list__info {
-      margin-bottom: 16px;
-
-      em {
-        display: none;
-      }
-    }
-  }
-
-  .basic-list__form {
-    .el-dialog__body {
-      padding-bottom: 10px;
-    }
-  }
-</style>
 <style lang="scss" scoped>
   @import "@/style/variables.scss";
 
@@ -199,19 +142,75 @@
       }
     }
 
-    .insert-button {
-      width: 100%;
-      color: rgba(0, 0, 0, 0.65);
-      background-color: #fff;
-      border-color: #d9d9d9;
-      border-style: dashed;
+    .statistical-card {
+      /deep/ {
+        .info {
+          position: relative;
+          text-align: center;
 
-      &:hover {
-        color: #40a9ff;
-        background-color: #fff;
-        border-color: #40a9ff;
+          span {
+            color: rgba(0, 0, 0, 0.45);
+            display: inline-block;
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 4px;
+          }
+
+          p {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 24px;
+            line-height: 32px;
+            margin: 0;
+          }
+
+          em {
+            background-color: #e8e8e8;
+            position: absolute;
+            height: 56px;
+            width: 1px;
+            top: 0;
+            right: 0;
+          }
+        }
+
+        @media screen and (max-width: $--sm) {
+          .info {
+            margin-bottom: 16px;
+
+            em {
+              display: none;
+            }
+          }
+        }
       }
     }
+
+    .list-card {
+      /deep/ {
+        .el-card__header {
+          border-bottom: none;
+        }
+
+        .el-card__body {
+          padding-top: 0;
+        }
+      }
+
+      .insert-button {
+        width: 100%;
+        color: rgba(0, 0, 0, 0.65);
+        background-color: #fff;
+        border-color: #d9d9d9;
+        border-style: dashed;
+
+        &:hover {
+          color: #40a9ff;
+          background-color: #fff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+
 
     .list {
       .el-list-item-meta-avatar {
@@ -269,6 +268,14 @@
     .dialog-button {
       font-size: 14px;
     }
+
+    .form {
+      /deep/ {
+        .el-dialog__body {
+          padding-bottom: 10px;
+        }
+      }
+    }
   }
 </style>
 
@@ -300,7 +307,7 @@ export default {
       render() {
         const { bordered, title, value } = this;
         return (
-          <div class="basic-list__info">
+          <div class="info">
             <span>{title}</span>
             <p>{value}</p>
             {
