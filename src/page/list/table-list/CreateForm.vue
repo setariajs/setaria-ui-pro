@@ -23,7 +23,8 @@ export default {
   },
   data() {
     return {
-      form: {},
+      form: {
+      },
       itemLayout: {
         labelWidth: {
           span: 6,
@@ -34,7 +35,7 @@ export default {
       },
       rules: {
         desc: [
-          { required: true, message: '请输入至少五个字符的规则描述！' },
+          { required: true, message: '请输入规则描述！' },
           { min: 5, message: '请输入至少五个字符的规则描述！' },
         ],
       },

@@ -39,33 +39,37 @@
     </el-grid-content>
   </div>
 </template>
-<style lang="scss">
-.step-form {
-  .el-steps {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: transparent;
+<style lang="scss" scoped>
+@import "@/style/variables.scss";
 
-    .el-step {
-      &.is-simple {
-        .el-step__icon {
-          font-size: 16px;
-          width: 32px;
-          height: 32px;
-        }
-        .el-step__head {
-          &.is-process {
-            .el-step__icon {
-              background: #1890FF;
-              color: #fff;
-              border-color: #1890FF;
+.step-form {
+  /deep/ {
+    .el-steps {
+      margin-left: auto;
+      margin-right: auto;
+      background-color: transparent;
+
+      .el-step {
+        &.is-simple {
+          .el-step__icon {
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+          }
+          .el-step__head {
+            &.is-process {
+              .el-step__icon {
+                background: #1890FF;
+                color: #fff;
+                border-color: #1890FF;
+              }
             }
           }
-        }
-        .el-step__main {
-          .el-step__title {
-            &.is-finish {
-              color: rgba(0, 0, 0, 0.65);
+          .el-step__main {
+            .el-step__title {
+              &.is-finish {
+                color: $--color-text-secondary;
+              }
             }
           }
         }

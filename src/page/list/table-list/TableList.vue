@@ -232,7 +232,8 @@
     <el-dialog
       class="table-list__dialog"
       title="新建规则"
-      :visible.sync="createFormVisible">
+      :visible.sync="createFormVisible"
+      width="40%">
       <create-form ref="createForm" v-model="selectedRule" v-if="createFormVisible"></create-form>
       <span slot="footer">
         <el-button @click="handleCloseCreateForm" size="small">取 消</el-button>
@@ -267,25 +268,6 @@
     </el-dialog>
   </div>
 </template>
-<style lang="scss">
-.table-list {
-  .el-form {
-    .el-form-item {
-      display: flex;
-
-      .el-form-item__content {
-        flex: 1;
-      }
-    }
-  }
-
-  .table-list__dialog {
-    .el-dialog__body {
-      padding-bottom: 10px;
-    }
-  }
-}
-</style>
 <style lang="scss" scoped>
 $--col--padding: 24px !default;
 
@@ -293,6 +275,16 @@ $--col--padding: 24px !default;
   .el-form {
     margin-left: -20px;
     margin-right: -20px;
+
+    /deep/ {
+      .el-form-item {
+        display: flex;
+
+        .el-form-item__content {
+          flex: 1;
+        }
+      }
+    }
 
     .el-row {
       .el-col {
@@ -360,6 +352,12 @@ $--col--padding: 24px !default;
   .table-list__dialog {
     .prev-step-button {
       float: left;
+    }
+
+    /deep/ {
+      .el-dialog__body {
+        padding: 32px 48px 40px;
+      }
     }
   }
 }

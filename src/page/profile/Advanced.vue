@@ -65,7 +65,10 @@
           <el-step>
             <span
               slot="title"
-              :style="{'font-weight': 2 === projectProcessActive ? '500': ''}">
+              :style="{
+                'font-weight': 2 === projectProcessActive ? '500': '',
+                'color': 'rgba(0, 0, 0, 0.85)',
+              }">
               部门初审
             </span>
             <div slot="description" class="step-description">
@@ -165,24 +168,6 @@
     </el-grid-content>
   </div>
 </template>
-<style lang="scss">
-.advanced-profile {
-  .content {
-    .project-process-step {
-      .el-step {
-        .el-step__main {
-          margin-left: -20px;
-
-          .el-step__title {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.65);
-          }
-        }
-      }
-    }
-  }
-}
-</style>
 <style lang="scss" scoped>
 @import '@/style/variables.scss';
 
@@ -226,12 +211,25 @@
       .project-process-step {
         margin: 0 50px;
 
-        .step-description {
-          color: rgba(0, 0, 0, 0.45);
+        /deep/ {
+          .el-step {
+            .el-step__main {
+              margin-left: -20px;
 
-          .el-button {
-            padding-top: 0;
-            padding-bottom: 0;
+              .el-step__title {
+                font-size: 16px;
+                color: rgba(0, 0, 0, 0.65);
+              }
+
+              .step-description {
+                color: rgba(0, 0, 0, 0.45);
+
+                .el-button {
+                  padding-top: 0;
+                  padding-bottom: 0;
+                }
+              }
+            }
           }
         }
       }

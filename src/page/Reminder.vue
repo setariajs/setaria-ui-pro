@@ -106,57 +106,62 @@
     </el-tab-pane>
   </el-tabs>
 </template>
-<style lang="scss">
-.remind-popover-tabs {
-  .el-tabs__header {
-    margin-bottom: 0;
-  }
-
-  .el-tabs__nav-scroll,
-  .el-list-item {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-</style>
 <style lang="scss" scoped>
 .remind-popover-tabs {
-  .el-list{
-    & > * {
-      cursor: pointer;
+  /deep/ {
+    .el-tabs__header {
+      margin-bottom: 0;
+
+      .el-tabs__nav-scroll {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
     }
 
-    & > .el-list-item:hover {
-      background-color: #e6f7ff;
-    }
+    .el-tabs__content {
+      .el-list {
+        & > * {
+          cursor: pointer;
+        }
 
-    .remind-tabs-message__user-icon {
-      height: 30px;
-    }
+        & > .el-list-item:hover {
+          background-color: #e6f7ff;
+        }
 
-    .remind-list-footer {
-      text-align: center;
-      cursor: pointer;
-    }
+        .el-list-item {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
 
-    .el-list-item-meta-description {
-      font-size: 13px !important;
-    }
-  }
+        .remind-tabs-message__user-icon {
+          height: 30px;
+        }
 
-  .remind-no-data {
-    text-align: center;
-    display: flex;
-    height: 200px;
-    align-items: center;
+        .remind-list-footer {
+          text-align: center;
+          cursor: pointer;
+        }
 
-    i {
-      font-size: 48px;
-      color: rgba(0, 0,0, 0.25);
-    }
+        .el-list-item-meta-description {
+          font-size: 13px !important;
+        }
+      }
 
-    & > div {
-      flex: 1;
+      .remind-no-data {
+        text-align: center;
+        display: flex;
+        height: 200px;
+        align-items: center;
+
+        i {
+          font-size: 48px;
+          color: rgba(0, 0,0, 0.25);
+        }
+
+        & > div {
+          flex: 1;
+        }
+      }
     }
   }
 }

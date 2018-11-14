@@ -111,9 +111,12 @@
   }
 
   .el-list {
+    margin-top: 12px;
+
     .el-list-item {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      margin-bottom: 16px;
+      padding-left: 0;
+      padding-right: 0;
 
       .el-card {
         .title {

@@ -89,6 +89,15 @@
     }
 
     .project-process {
+      /deep/ .el-step {
+        .el-step__main {
+          .el-step__title {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.65);
+          }
+        }
+      }
+
       .step-description {
         color: rgba(0, 0, 0, 0.45);
 
@@ -105,20 +114,6 @@
 
     .actions {
       margin-top: 32px;
-    }
-  }
-}
-</style>
-<style lang="scss">
-.success {
-  .project-process {
-    .el-step {
-      .el-step__main {
-        .el-step__title {
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.65);
-        }
-      }
     }
   }
 }

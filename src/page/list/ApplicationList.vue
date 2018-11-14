@@ -45,7 +45,10 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-list :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }" class="list">
+    <el-list
+      :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }"
+      class="list"
+      :loading="loading">
       <el-list-item v-for="item in listData" :key="item.id">
         <el-card shadow="hover">
           <el-card-meta :title="item.title" class="card-meta">
@@ -137,6 +140,9 @@
     margin-top: 24px;
 
     .el-list-item {
+      padding-left: 0;
+      padding-right: 0;
+
       .el-card {
         .title {
           color: rgba(0, 0, 0, 0.85);
@@ -216,6 +222,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.loading.actions['list/queryFakeList'];
+    },
     listData() {
       return this.$store.state.list.fakeList;
     },

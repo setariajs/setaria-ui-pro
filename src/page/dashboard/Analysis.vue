@@ -124,11 +124,6 @@
     </el-card>
   </el-grid-content>
 </template>
-<style lang="scss">
-  .analysis_sales .el-card__header.is-tab {
-    padding-top: 12px;
-  }
-</style>
 <style lang="scss" scoped>
   .chart {
     .trend {
@@ -159,6 +154,21 @@
 
   .analysis_sales {
     margin-top: 16px;
+
+    /deep/ {
+      .el-card__header {
+        &.is-tab {
+          padding-top: 8px;
+        }
+
+        .el-tabs__item {
+          &:not(.is-active) {
+            color: rgba(0, 0, 0, 0.65);
+            font-weight: normal;
+          }
+        }
+      }
+    }
 
     .sales-rank {
       padding: 0 32px 32px 72px;

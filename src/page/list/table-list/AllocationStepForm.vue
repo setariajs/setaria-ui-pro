@@ -1,31 +1,29 @@
 <template>
-  <el-grid-content class="allocation-step-form">
+  <div class="allocation-step-form">
     <el-steps :active="active" finish-status="success" simple class="steps">
       <el-step title="基本信息"></el-step>
       <el-step title="配置规则属性"></el-step>
       <el-step title="设定调度周期"></el-step>
     </el-steps>
     <component ref="stepForm" v-model="form" :is="componentId"/>
-  </el-grid-content>
+  </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .allocation-step-form {
   .el-steps {
+    margin-top: -24px;
+    margin-bottom: 28px;
+    background: transparent;
+
     .el-step {
-      .el-step__title {
-        font-size: 14px;
+      font-size: 14px;
+
+      /deep/ {
+        .el-step__title {
+          font-size: 14px;
+        }
       }
     }
-  }
-}
-</style>
-<style lang="scss" scoped>
-.steps {
-  margin-top: -24px;
-  margin-bottom: 28px;
-
-  .step {
-    font-size: 14px;
   }
 }
 </style>

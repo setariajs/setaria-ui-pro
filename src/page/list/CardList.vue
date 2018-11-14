@@ -29,14 +29,14 @@
       </div>
     </el-page-header>
     <el-grid-content>
-      <el-list :grid="{ gutter: 24, xl: 4, lg: 3, md: 2, sm: 1, xs: 1 }">
+      <el-list :grid="{ gutter: 24, xl: 4, lg: 3, md: 2, sm: 1, xs: 1 }" class="list-content">
         <el-list-item>
           <el-button class="insert-button">
             <i class="el-icon-plus"></i>新增产品
           </el-button>
         </el-list-item>
         <el-list-item v-for="(data, index) in listData" :key="index">
-          <el-card shadow="hover" class="card-list-item">
+          <el-card shadow="hover">
             <el-card-meta :description="data.description">
               <a slot="title">
                 {{ data.title }}
@@ -60,34 +60,6 @@
     </el-grid-content>
   </div>
 </template>
-<style lang="scss">
-@import "@/style/variables.scss";
-
-.card-list {
-  .el-card {
-    .el-card-meta__detail-title {
-      margin-bottom: 12px;
-      & > a {
-        color: $--color-text-primary;
-        display: inline-block;
-        max-width: 100%;
-      }
-    }
-    .el-card__actions {
-      background: #f7f9fa;
-    }
-    .el-card__body {
-      &:hover {
-        .el-card-meta__detail-title {
-          & > a {
-            color: $--link-hover-color;
-          }
-        }
-      }
-    }
-  }
-}
-</style>
 <style lang="scss" scoped>
 @import "@/style/variables.scss";
 
@@ -149,13 +121,52 @@
     }
   }
 
-  .card-list-item {
-    cursor: pointer;
+  .list-content {
+    .el-list-item {
+      padding: 0px;
 
-    .card-avatar {
-      width: 48px !important;
-      height: 48px !important;
-      border-radius: 48px;
+      .el-card {
+        cursor: pointer;
+
+        /deep/ {
+          .el-card__actions {
+            background: #f7f9fa;
+          }
+
+          .el-card__body {
+            .el-card-meta {
+              .el-card-meta__detail {
+                .el-card-meta__detail-title {
+                  margin-bottom: 12px;
+                  & > a {
+                    color: $--color-text-primary;
+                    display: inline-block;
+                    max-width: 100%;
+                  }
+                }
+              }
+            }
+
+            &:hover {
+              .el-card-meta {
+                .el-card-meta__detail {
+                  .el-card-meta__detail-title {
+                    & > a {
+                      color: $--link-hover-color;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .card-avatar {
+          width: 48px !important;
+          height: 48px !important;
+          border-radius: 48px;
+        }
+      }
     }
   }
 }

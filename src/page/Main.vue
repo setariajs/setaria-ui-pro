@@ -117,27 +117,11 @@
   </el-container>
 </template>
 <style lang="scss">
-@import "../style/variables.scss";
-
 .remind-popover {
   padding: 0 !important;
   width: 327px;
 }
-.main {
-  .nav-menu {
-    &.el-menu--collapse {
-      .el-submenu__title {
-        text-align: center;
-        font-size: 18px;
-      }
-    }
-  }
-}
-.nav-menu-item.is-active {
-  background-color: $--color-primary !important;
-}
 </style>
-
 <style lang="scss" scoped>
 @import "../style/variables.scss";
 
@@ -181,6 +165,18 @@ $--app-brand-height: 64px;
           .el-submenu__title {
             i, span {
               color: #fff;
+            }
+          }
+        }
+      }
+
+      /deep/ {
+        &.el-menu--collapse {
+          .el-submenu__title {
+            text-align: center;
+            font-size: 18px;
+            .menu-icon {
+              margin-right: 0;
             }
           }
         }
