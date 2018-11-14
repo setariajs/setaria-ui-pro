@@ -18,7 +18,9 @@ import TagSelectItem from './tag-select-item';
 import Trend from './trend';
 
 // 使用中文语言加载Setaria UI
-Vue.use(SetariaUI, locale);
+Vue.use(SetariaUI, {
+  locale,
+});
 
 const customComponents = {
   AvatarList,
