@@ -117,13 +117,19 @@
           v-loading="isTableDataLoading">
           <el-table-column label="成员姓名">
             <template slot-scope="scope">
-              <el-input v-model="cacheOriginData[scope.row.key].name" v-if="scope.row.editable"/>
+              <el-input
+                v-model="cacheOriginData[scope.row.key].name"
+                v-if="scope.row.editable"
+                size="small"/>
               <span v-else>{{ scope.row.name }}</span>
             </template>
           </el-table-column>
           <el-table-column label="工号">
             <template slot-scope="scope">
-              <el-input v-model="cacheOriginData[scope.row.key].workId" v-if="scope.row.editable"/>
+              <el-input
+                v-model="cacheOriginData[scope.row.key].workId"
+                v-if="scope.row.editable"
+                size="small"/>
               <span v-else>{{ scope.row.workId }}</span>
             </template>
           </el-table-column>
@@ -131,7 +137,8 @@
             <template slot-scope="scope">
               <el-input
                 v-model="cacheOriginData[scope.row.key].department"
-                v-if="scope.row.editable"/>
+                v-if="scope.row.editable"
+                size="small"/>
               <span v-else>{{ scope.row.department }}</span>
             </template>
           </el-table-column>
