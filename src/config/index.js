@@ -4,8 +4,11 @@ import store from './store';
 
 export default {
   http: {
-    api: {
+    defaults: {
       timeout: 60000,
+      baseURL: '/',
+    },
+    api: {
       baseURL: '/api/',
     },
   },

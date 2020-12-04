@@ -11,16 +11,16 @@
     "deploy": "yarn build && gh-pages -d dist"
   },
   "dependencies": {
-    "axios-mock-adapter": "^1.15.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.10",
-    "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
-    "setaria": "^0.3.3",
+    "setaria": "^0.4.0",
     "setaria-ui": "^1.4.0",
     "throttle-debounce": "^1.0.1",
-    "vue": "^2.5.13",
+    "vue": "2.5.21",
+    "vue-router": "^2.2.x",
+    "vuex": "^2.3.1",
     "vue-echarts": "^3.0.7"
   },
   "devDependencies": {
@@ -28,6 +28,8 @@
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.5",
+    "mockjs": "^1.0.1-beta3",
+    "axios-mock-adapter": "^1.15.0",
     "gh-pages": "^1.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",

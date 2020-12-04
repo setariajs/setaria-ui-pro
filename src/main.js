@@ -9,7 +9,7 @@ import App from './App.vue';
 import mockConfig from '../mock/index';
 import { delay, init } from '../mock/adapter';
 
-const setaria = new Setaria(config);
+const sdk = new Setaria(config);
 // Setaria初始化
 Vue.use(Setaria);
 // 安装全局组件
@@ -21,6 +21,6 @@ router.beforeResolve(updateBrowserTitle);
 init(delay(mockConfig, 500));
 
 new Vue({
-  setaria,
+  sdk,
   render: h => h(App),
 }).$mount('#app');
